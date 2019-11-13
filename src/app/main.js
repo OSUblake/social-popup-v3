@@ -1,17 +1,13 @@
 import * as dat from "dat.gui";
-// import Handlebars from "handlebars/dist/cjs/handlebars";
 import throttle from "lodash-es/throttle";
 import invert from "lodash-es/invert";
 import isEqual from "lodash-es/isEqual";
 import omit from "lodash-es/omit";
-// import pick from "lodash-es/pick";
 import merge from "lodash-es/merge";
 import upperFirst from "lodash-es/upperFirst";
 import fontOptions from "./font-options.js";
 import Store from "./store.js";
 import parseTemplate from "./parse-template.js";
-
-// blah
 
 const settingsStore = new Store("scocialPopup1");
 
@@ -90,8 +86,6 @@ async function init() {
   controllers = build.controllers;
   settings = build.settings;
   folders = build.folders;
-
-  // console.log("SETTINGS", settings)
 
   Object.assign(
     settings, 

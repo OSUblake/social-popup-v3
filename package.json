@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "start": "npm-run-all -s clean build -p serve watch",
+    "start": "npm-run-all -s clean build -p serve watch:app watch:public",
     "build": "npm run build:public && npm run build:app && node scripts/build-widgets.js",
     "build:widgets": "npm run build:public && node scripts/build-widgets.js",
     "build:app": "rollup -c scripts/rollup-app.config.js",
