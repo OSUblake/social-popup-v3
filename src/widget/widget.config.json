@@ -1,0 +1,178 @@
+{  
+  "development": {
+
+    "eventTarget": "document",
+    "loadEvent": "onLoad",
+
+    "customFields": {
+      "panel1_heading": {
+        "value": "@NERDSPWN"
+      },
+      "panel1_subheading": {
+        "value": "make sure to follow me on twitter!"
+      },
+      "panel1_icon": {
+        "value": "../assets/icon-1.png"
+      },
+
+      "panel2_heading": {
+        "value": "@NERDORDIELONGERNAME"
+      },
+      "panel2_subheading": {
+        "value": ""
+      },
+      "panel2_icon": {
+        "value": "../assets/icon-2.png"
+      },
+
+      "panel3_heading": {
+        "value": "SUBSCRIBE FOR FREE"
+      },
+      "panel3_subheading": {
+        "value": "using twitch"
+      },
+      "panel3_icon": {
+        "value": "../assets/icon-3.png"
+      },
+
+      "panel4_heading": {
+        "value": "@NERDSPWN"
+      },
+      "panel4_subheading": {
+        "value": "make sure to follow me on twitter!"
+      },
+      "panel4_icon": {
+        "value": "../assets/icon-4.png"
+      },
+
+      "panel5_heading": {
+        "value": "@NERDSPWN"
+      },
+      "panel5_subheading": {
+        "value": "make sure to follow me on twitter!"
+      },
+      "panel5_icon": {
+        "value": "../assets/icon-1.png"
+      },
+
+      "panel6_heading": {
+        "value": "@NERDSPWN"
+      },
+      "panel6_subheading": {
+        "value": "make sure to follow me on twitter!"
+      },
+      "panel6_icon": {
+        "value": "../assets/icon-1.png"
+      },
+
+      "megaPanel1_heading": {
+        "value": "@NERDSPWN"
+      },
+      "megaPanel1_subheading": {
+        "value": "make sure to follow me on twitter!"
+      },
+      "megaPanel1_icon": {
+        "value": "../assets/icon-1.png"
+      },
+      "megaPanel1_image": {
+        "value": "../assets/icon-1.png"
+      },
+
+      "megaPanel2_heading": {
+        "value": "@NERDSPWN"
+      },
+      "megaPanel2_subheading": {
+        "value": "make sure to follow me on twitter!"
+      },
+      "megaPanel2_icon": {
+        "value": "../assets/icon-1.png"
+      },
+      "megaPanel2_image": {
+        "value": "../assets/icon-1.png"
+      },
+
+      "megaPanel3_heading": {
+        "value": "@NERDSPWN"
+      },
+      "megaPanel3_subheading": {
+        "value": "make sure to follow me on twitter!"
+      },
+      "megaPanel3_icon": {
+        "value": "../assets/icon-1.png"
+      },
+      "megaPanel3_image": {
+        "value": "../assets/icon-1.png"
+      },
+
+      "megaPanel4_heading": {
+        "value": "@NERDSPWN"
+      },
+      "megaPanel4_subheading": {
+        "value": "make sure to follow me on twitter!"
+      },
+      "megaPanel4_icon": {
+        "value": "../assets/icon-1.png"
+      },
+      "megaPanel4_image": {
+        "value": "../assets/icon-1.png"
+      }
+    }
+  },
+  
+  "streamElements": {
+    "eventTarget": "window",
+    "loadEvent": "onWidgetLoad",
+    "customFields": {
+      "backgroundOpacity": {
+        "type": "remove"
+      },
+      "panel1_iconBackgroundOpacity": {
+        "type": "remove"
+      },
+      "panel2_iconBackgroundOpacity": {
+        "type": "remove"
+      },
+      "panel3_iconBackgroundOpacity": {
+        "type": "remove"
+      },
+      "panel4_iconBackgroundOpacity": {
+        "type": "remove"
+      },
+      "panel5_iconBackgroundOpacity": {
+        "type": "remove"
+      },
+      "panel6_iconBackgroundOpacity": {
+        "type": "remove"
+      },
+      "megaPanel1_iconBackgroundOpacity": {
+        "type": "remove"
+      },
+      "megaPanel1_imageBackgroundOpacity": {
+        "type": "remove"
+      },
+      "megaPanel2_iconBackgroundOpacity": {
+        "type": "remove"
+      },
+      "megaPanel2_imageBackgroundOpacity": {
+        "type": "remove"
+      },
+      "megaPanel3_iconBackgroundOpacity": {
+        "type": "remove"
+      },
+      "megaPanel3_imageBackgroundOpacity": {
+        "type": "remove"
+      },
+      "megaPanel4_iconBackgroundOpacity": {
+        "type": "remove"
+      },
+      "megaPanel4_imageBackgroundOpacity": {
+        "type": "remove"
+      }
+    }
+  },
+
+  "streamlabs": {
+    "eventTarget": "document",
+    "loadEvent": "onLoad"
+  }
+}

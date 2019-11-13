@@ -1,0 +1,32 @@
+:root {
+  --backgroundColor: $_backgroundColor_$;
+  --backgroundOpacity: $_backgroundOpacity_$;
+  
+  --headingFont: '$_headingFont_$', sans-serif;
+  --headingFontWeight: $_headingFontWeight_$;
+  --headingFontSize: $_headingFontSize_$px;
+  --headingColor: $_headingColor_$;
+
+  --subheadingFont: '$_subheadingFont_$', sans-serif;
+  --subheadingFontWeight: $_subheadingFontWeight_$;
+  --subheadingFontSize: $_subheadingFontSize_$px;
+  --subheadingColor: $_subheadingColor_$;
+
+  --panel1_iconBackgroundOpacity: $_panel1_iconBackgroundOpacity_$;
+  --megaPanel1_iconBackgroundOpacity: $_megaPanel1_iconBackgroundOpacity_$;
+  --megaPanel1_imageBackgroundOpacity: $_megaPanel1_imageBackgroundOpacity_$;
+}
+
+.heading {
+  font-family: var(--headingFont);
+  font-weight: var(--headingFontWeight);
+  font-size: var(--headingFontSize);
+  color: var(--headingColor);
+}
+
+.subheading {
+  font-family: var(--subheadingFont);
+  font-weight: var(--subheadingFontWeight);
+  font-size: var(--subheadingFontSize);
+  color: var(--subheadingColor);
+}
