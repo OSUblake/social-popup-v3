@@ -1,11 +1,11 @@
-import { clamp, escapeHtml, isNumeric, absoluteValue, select, selectAll, toRGBA } from "./js/utils.js";
+import { escapeHtml, select, selectAll } from "./js/utils.js";
 import loadFont from "./js/load-fonts.js";
 import loadImages from "./js/load-images.js";
 import loadScripts from "./js/load-scripts.js";
 import settings from "./js/settings.js";
 
 $_eventTarget_$.addEventListener("$_loadEvent_$", event => {
-  console.log("loaded");
+  // console.log("loaded");
 });
 
 const scriptPaths = [

@@ -36,7 +36,6 @@ const gui2 = new dat.GUI({
 
 });
 
-// gui2.add(guiControls, "clearStorage").name("Clear Storage");
 gui2.add(guiControls, "resetSettings").name("Reset GUI");
 
 const iframe = document.querySelector("#iframe");
@@ -54,11 +53,7 @@ async function init() {
   json = JSON.parse(json);
   config = JSON.parse(config);
 
-  // Object.assign(json, config.development.customFields);
-
   merge(json, config.development.customFields);
-
-  // console.log("JSON", json)
 
   template = `
     <html>
