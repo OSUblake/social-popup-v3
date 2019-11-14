@@ -8,13 +8,16 @@ $_eventTarget_$.addEventListener("$_loadEvent_$", event => {
   // console.log("loaded");
 });
 
-const scriptPaths = [
-  "../vendor/gsap.min.js",
-  "../vendor/SplitText.min.js"
-];
+const scriptPaths = [$_scripts_$];
 
-let panels = settings.panels.filter(p => p.heading).slice(0, settings.numPanels);
-let megaPanels = settings.megaPanels.filter(p => p.heading && p.image).slice(0, settings.numMegaPanels);
+let panels = settings.panels
+  .filter(p => p.heading)
+  .slice(0, settings.numPanels);
+
+let megaPanels = settings.megaPanels
+  .filter(p => p.heading && p.image)
+  .slice(0, settings.numMegaPanels);
+
 let allPanels = [...panels, ...megaPanels];
 
 const container = select(".social-popup-container");

@@ -28,16 +28,8 @@ async function buildWidgets() {
   config = JSON.parse(config);
   fields = JSON.parse(json);
 
-  html = prettier.format(html, {
-    parser: "html"
-  });
-
   css = prettier.format(css, {
     parser: "css"
-  });
-
-  js = prettier.format(js, {
-    parser: "babel"
   });
   
   const tags = config.tags || ["$_","_$"];
@@ -157,14 +149,24 @@ async function createStreamlabs({ fields, config, compile }) {
   
   createDir(streamlabsDir);
 
-  var json = prettier.format(JSON.stringify(fields), {
+  const json = prettier.format(JSON.stringify(fields), {
     parser: "json-stringify"
   });
 
+  const html = prettier.format(compile.html(settings), {
+    parser: "html"
+  });
+
+  const js = prettier.format(compile.js(settings), {
+    parser: "babel"
+  });
+
+  const css = compile.css(settings);
+
   await Promise.all([
-    writeFile(streamlabsDir, "widget.html", compile.html(settings)),
-    writeFile(streamlabsDir, "widget.css", compile.css(settings)),
-    writeFile(streamlabsDir, "widget.js", compile.js(settings)),
+    writeFile(streamlabsDir, "widget.html", html),
+    writeFile(streamlabsDir, "widget.css", css),
+    writeFile(streamlabsDir, "widget.js", js),
     writeFile(streamlabsDir, "widget.json",  json)
   ]);
 
@@ -264,14 +266,24 @@ async function createStreamElements({ fields, config, compile }) {
   
   createDir(streamElementsDir);
 
-  var json = prettier.format(JSON.stringify(fields), {
+  const json = prettier.format(JSON.stringify(fields), {
     parser: "json-stringify"
   });
 
+  const html = prettier.format(compile.html(settings), {
+    parser: "html"
+  });
+
+  const js = prettier.format(compile.js(settings), {
+    parser: "babel"
+  });
+
+  const css = compile.css(settings);
+
   await Promise.all([
-    writeFile(streamElementsDir, "widget.html", compile.html(settings)),
-    writeFile(streamElementsDir, "widget.css", compile.css(settings)),
-    writeFile(streamElementsDir, "widget.js", compile.js(settings)),
+    writeFile(streamElementsDir, "widget.html", html),
+    writeFile(streamElementsDir, "widget.css", css),
+    writeFile(streamElementsDir, "widget.js", js),
     writeFile(streamElementsDir, "widget.json",  json)
   ]);
 
