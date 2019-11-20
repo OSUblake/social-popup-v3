@@ -1,14 +1,14 @@
 export default {
-  showDuration: parseFloat("$_showDuration_$"),
-  replayWait: parseFloat("$_replayWait_$"),
+  showDuration: Number("$_showDuration_$"),
+  replayWait: Number("$_replayWait_$"),
   widthAdjust: "$_widthAdjust_$",
-  maxWidth: parseInt("$_maxWidth_$", 10),
-  maxImageWidth: parseInt("$_maxImageWidth_$", 10),
-  maxImageHeight: parseInt("$_maxImageHeight_$", 10),
+  maxWidth: Number("$_maxWidth_$"),
+  maxImageWidth: Number("$_maxImageWidth_$"),
+  maxImageHeight: Number("$_maxImageHeight_$"),
   headingFont: "$_headingFont_$",
   subheadingFont: "$_subheadingFont_$",
-  numPanels: parseInt("$_numPanels_$", 10),
-  numMegaPanels: parseInt("$_numMegaPanels_$", 10),
+  numPanels: Number("$_numPanels_$"),
+  numMegaPanels: Number("$_numMegaPanels_$"),
   panels: [
     {
       id: "panel1",

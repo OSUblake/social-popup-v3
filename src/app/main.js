@@ -12,7 +12,7 @@ import parseTemplate from "./parse-template.js";
 const settingsStore = new Store("scocialPopup1");
 
 const urls = [
-  "../widget/widget.config.json",
+  "../widget/config.json",
   "../widget/widget.json",
   "../widget/widget.html",
   "../widget/widget.css",

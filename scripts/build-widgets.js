@@ -11,7 +11,7 @@ const streamlabsDir = path.resolve(__dirname, "../build/streamlabs");
 const streamElementsDir = path.resolve(__dirname, "../build/stream-elements");
 
 const fileNames = [
-  "widget.config.json",
+  "config.json",
   "widget.json",
   "widget.html",
   "widget.css",

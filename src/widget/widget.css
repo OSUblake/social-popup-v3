@@ -17,6 +17,33 @@
   --megaPanel1_imageBackgroundOpacity: $_megaPanel1_imageBackgroundOpacity_$;
 }
 
+.popup-holder, .popup-holder * {
+  position: relative;
+}
+
+.popup-holder {
+  visibility: hidden;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.popup-container {
+
+}
+
+.popup-background {
+  background-color: var(--backgroundColor);
+  opacity: var(--backgroundOpacity);
+}
+
+.fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .heading {
   font-family: var(--headingFont);
   font-weight: var(--headingFontWeight);

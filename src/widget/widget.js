@@ -8,6 +8,7 @@ $_eventTarget_$.addEventListener("$_loadEvent_$", event => {
   // console.log("loaded");
 });
 
+
 const scriptPaths = [$_scripts_$];
 
 let panels = settings.panels
@@ -20,7 +21,7 @@ let megaPanels = settings.megaPanels
 
 let allPanels = [...panels, ...megaPanels];
 
-const container = select(".social-popup-container");
+const popupHolder = select(".popup-holder");
 
 Promise.all([
   loadFont(settings.headingFont, settings.subheadingFont),
@@ -31,8 +32,24 @@ Promise.all([
 .catch(err => console.error("Failed to load assets"));
 
 function buildWidget() {
-  gsap.to(container, {
+
+  // console.log("STANDARD", panels);
+  // console.log("MEGA", megaPanels);
+
+  
+
+  const html = /*html*/`
+    <div class="popup-container">
+      <div class="popup-background fill"></div>
+      <h1>Hello</h1>
+    </div>
+  `;
+
+  popupHolder.innerHTML = html;
+
+  gsap.to(popupHolder, {
     duration: 0.1,
     autoAlpha: 1
   });
+
 }

@@ -4,8 +4,9 @@
     "eventTarget": "document",
     "loadEvent": "onLoad",
     "scripts": [
-      "\"../vendor/gsap.min.js\"",
-      "\"../vendor/SplitText.min.js\""
+      "\"https://ext-assets.streamlabs.com/users/140067/gsap.min.js\"",
+      "\"https://ext-assets.streamlabs.com/users/140067/SplitText.min.js\"",
+      "\"https://ext-assets.streamlabs.com/users/140067/CustomEase.min.js\""
     ],
 
     "customFields": {
@@ -127,8 +128,9 @@
     "eventTarget": "window",
     "loadEvent": "onWidgetLoad",
     "scripts": [
-      "\"../vendor/gsap.min.js\"",
-      "\"../vendor/SplitText.min.js\""
+      "\"https://cdn.nerdordie.com/gsap/3/gsap.min.js\"",
+      "\"https://cdn.nerdordie.com/gsap/3/SplitText.min.js\"",
+      "\"https://cdn.nerdordie.com/gsap/3/CustomEase.min.js\""
     ],
     "customFields": {
       "backgroundOpacity": {
@@ -183,8 +185,9 @@
     "eventTarget": "document",
     "loadEvent": "onLoad",
     "scripts": [
-      "\"../vendor/gsap.min.js\"",
-      "\"../vendor/SplitText.min.js\""
+      "\"https://ext-assets.streamlabs.com/users/140067/gsap.min.js\"",
+      "\"https://ext-assets.streamlabs.com/users/140067/SplitText.min.js\"",
+      "\"https://ext-assets.streamlabs.com/users/140067/CustomEase.min.js\""
     ]
   }
 }
