@@ -1,4 +1,6 @@
 export default {
+  flipX: $_flipX_$,
+  flipY: $_flipY_$,
   showDuration: Number("$_showDuration_$"),
   replayWait: Number("$_replayWait_$"),
   widthAdjust: "$_widthAdjust_$",
