@@ -81,27 +81,17 @@
     },
     "folder": "Layout and style"
   },
-  "imageAlignHorizontal": {
+  "imageAlign": {
     "label": "Horizontal image alignment",
     "type": "dropdown",
     "value": "left",
     "options": {
         "left": "Left",
         "center": "Center",
-        "rigth": "Right"
+        "right": "Right"
     },
     "folder": "Layout and style"
-  },
-  "imageAlignVertical": {
-    "label": "Vertical image alignment",
-    "type": "dropdown",
-    "value": "bottom",
-    "options": {
-        "top": "Top",
-        "bottom": "Bottom"
-    },
-    "folder": "Layout and style"
-  },  
+  }, 
   "maxImageWidth": {
       "label": "Max image width",
       "type": "slider",

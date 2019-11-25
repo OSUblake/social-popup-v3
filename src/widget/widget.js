@@ -36,6 +36,8 @@ function buildWidget() {
     return;
   }
   
+  gsap.registerPlugin(SplitText);
+
   const textBoxes = [];
   const icons = [];
   const images = [];
@@ -106,13 +108,17 @@ function positionElements() {
 
   const maxTextBoxHeight = (settings.textBoxHeight - padY * 2);
 
-  const maxImageWidth = Math.min(settings.maxImageWidth, startWidth);
-  const maxImageHeight = Math.min(settings.maxImageHeight, startWidth);
+  const imageWidth = Math.min(settings.maxImageWidth, startWidth);
+  const imageHeight = Math.min(settings.maxImageHeight, startWidth);
+
+  const imageAlign = settings.imageAlign;
+  let maxImageHeight = -Infinity;
 
   const split = new SplitText(".popup-text-box__heading, .popup-text-box__subheading", {
     type: "chars"
   });
 
+  
   // force repaint?
   // popupContent.style.display = "none";
   // popupContent.offsetHeight;
@@ -151,8 +157,8 @@ function positionElements() {
 
     if (imageElement) {
 
-      const sx = maxImageWidth / panel.imageWidth;
-      const sy = maxImageHeight / panel.imageHeight;
+      const sx = imageWidth / panel.imageWidth;
+      const sy = imageHeight / panel.imageHeight;
 
       const scale = Math.min(sx, sy);
       
@@ -165,6 +171,10 @@ function positionElements() {
 
       if (panel.imageWidth > tempMaskWidth) {
         tempMaskWidth = panel.imageWidth;
+      }
+
+      if (panel.imageHeight > maxImageHeight) {
+        maxImageHeight = panel.imageHeight;
       }
 
       imageElement.style.width = panel.imageWidth + "px";
@@ -186,15 +196,12 @@ function positionElements() {
 
     if (textBoxWidth > maxWidth) {
       maxWidth = textBoxWidth;
-    }
-
-    gsap.set(textBoxMask, {
-      width: maskWidth,
-      x: maskX
-    });
+    }    
 
     panel.iconX = -deltaX;
     panel.bgScale = textBoxWidth / startWidth;
+
+    panel.textBoxWidth = textBoxWidth;
 
     panel.headingOverlow = Math.max(0, headingWidth - maskWidth);
     panel.subheadingOverlow = Math.max(0, subheadingWidth - maskWidth);
@@ -207,6 +214,41 @@ function positionElements() {
     panel.targets = {
       icon, image, imageElement, textBox, textBoxText, textBoxMask, heading, headingChars, subheading, subheadingChars
     };
+
+    gsap.set(textBoxMask, {
+      width: maskWidth,
+      x: maskX
+    });
+
+    if (image) {
+
+      let imageX = 0;
+      let imagePercent = 0;
+
+      switch (imageAlign) {
+        case "left":          
+          imageX = flipX ? textBoxWidth : 0;
+          imagePercent = flipX ? -100 : 0;
+          break;
+        case "center":
+          imageX = textBoxWidth / 2;
+          imagePercent = -50;
+          break;
+        case "right":
+          imageX = flipX ? 0 : textBoxWidth;
+          imagePercent = flipX ? 0 : -100;
+          break;
+      }
+
+      // console.log("imageAlign", imageAlign)
+      // console.log("imageX", imageX);
+      // console.log("imagePercent", imagePercent);
+
+      gsap.set(image, {
+        x: imageX,
+        xPercent: imagePercent
+      });
+    }
   });
 
   const firstPanel = allPanels[0];
@@ -218,6 +260,17 @@ function positionElements() {
   gsap.set(popupBackground, {
     scaleX: firstPanel.bgScale
   });
+
+  gsap.set(".popup-images", {
+    height: maxImageHeight * 2,
+    yPercent: -100
+  });
+
+  gsap.set(".popup-image", {
+    y: maxImageHeight * 2,
+
+    yPercent: -100
+  })
 
   gsap.set(".popup-text-box__text", {
     yPercent: -50

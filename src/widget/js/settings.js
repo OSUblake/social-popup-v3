@@ -8,6 +8,7 @@ export default {
   showDuration: Number($_showDuration_$),
   replayWait: Number($_replayWait_$),
   widthAdjust: "$_widthAdjust_$",
+  imageAlign: "$_imageAlign_$",
   maxImageWidth: Number($_maxImageWidth_$),
   maxImageHeight: Number($_maxImageHeight_$),
   headingFont: "$_headingFont_$",
