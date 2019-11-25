@@ -55,7 +55,8 @@
 
 
   width: calc(var(--maxTextBoxWidth) + var(--textBoxHeight));
-  height: calc(var(--textBoxHeight) + var(--maxImageHeight));  
+  /* height: calc(var(--textBoxHeight) + var(--maxImageHeight));   */
+  height: var(--textBoxHeight);
   background-color: #ccc;
 }
 
@@ -63,7 +64,7 @@
   width: var(--maxTextBoxWidth);
   height: var(--textBoxHeight);
 
-  top: var(--maxImageHeight);
+  /* top: var(--maxImageHeight); */
 }
 
 .popup-background {

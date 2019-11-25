@@ -200,9 +200,7 @@ function positionElements() {
 
     panel.iconX = -deltaX;
     panel.bgScale = textBoxWidth / startWidth;
-
     panel.textBoxWidth = textBoxWidth;
-
     panel.headingOverlow = Math.max(0, headingWidth - maskWidth);
     panel.subheadingOverlow = Math.max(0, subheadingWidth - maskWidth);
 
@@ -274,6 +272,14 @@ function positionElements() {
 
   gsap.set(".popup-text-box__text", {
     yPercent: -50
+  });
+
+  gsap.set(popupHolder, {
+    height: settings.textBoxHeight + maxImageHeight * 2
+  });
+
+  gsap.set(".popup-content", {
+    top: maxImageHeight * 2
   });
 
   if (flipX) {
