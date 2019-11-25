@@ -20,7 +20,10 @@ let megaPanels = settings.megaPanels
 
 let allPanels = [...panels, ...megaPanels];
 
+// const rootProps = gsap.getProperty("html");
+const root = select("html");
 const popupHolder = select(".popup-holder");
+let popupContent, popupBackground;
 
 Promise.all([
   loadFont(settings.headingFont, settings.subheadingFont),
@@ -31,6 +34,10 @@ Promise.all([
 .catch(err => console.error("Failed to load assets", err));
 
 function buildWidget() {
+
+  if (!allPanels.length) {
+    return;
+  }
   
   const textBoxes = [];
   const icons = [];
@@ -45,6 +52,7 @@ function buildWidget() {
             <div class="popup-text-box__heading">
               $${panel.heading}
             </div>
+            <div></div>
             ${panel.subheading ? html`<div class="popup-text-box__subheading">$${panel.subheading}</div>` : ""}
           </div>
         </div>          
@@ -82,64 +90,26 @@ function buildWidget() {
   `;
 
   positionElements();
+  buildAnimation();
 
-  // var split = new SplitText(".popup-text-box__heading, .popup-text-box__subheading", {
-  //   type: "chars"
+  // requestAnimationFrame(() => {
+  //   positionElements();
+  //   buildAnimations();
   // });
-
-  // var text1 = select(".popup-text-box__text");
-  // var rect = text1.getBoundingClientRect();
-
-  // if (rect.height > settings.textBoxHeight) {
-  //   var scale = (settings.textBoxHeight - settings.textBoxPadY * 2) / rect.height;
-
-  //   gsap.set(text1, {
-  //     scale
-  //   })
-  // }
-
-  // gsap.set(".popup-text-box__mask", {
-  //   x: settings.textBoxPadX
-  // })
-
-  gsap.set(".popup-text-box__text", {
-    yPercent: -50
-  });
-
-  if (settings.flipX) {
-
-    gsap.set(popupHolder, {
-      rotationY: 180
-    });
-
-    gsap.set(".popup-icon__image, .popup-image__image, .popup-image__background, .popup-text-boxes", {
-      rotationY: 180
-    });
-  }
-
-  if (settings.flipY) {
-
-    gsap.set(popupHolder, {
-      rotationX: 180
-    });
-
-    gsap.set(".popup-icon__image, .popup-image__image, .popup-image__background, .popup-text-boxes", {
-      rotationX: 180
-    });
-  }
-
-  gsap.to(popupHolder, {
-    duration: 0.1,
-    autoAlpha: 1
-  });
 }
 
 function positionElements() {
+
+  popupBackground = select(".popup-background");
+
+  let maxWidth = -Infinity;
 
   const adjustWidth = settings.widthAdjust.toLowerCase() === "auto";
   const startWidth = settings.textBoxWidth;
   const padX = settings.textBoxPadX;
   const padY = settings.textBoxPadY;
+  const flipX = settings.flipX;
+  const flipY = settings.flipY;
 
   const split = new SplitText(".popup-text-box__heading, .popup-text-box__subheading", {
     type: "chars"
@@ -179,170 +149,85 @@ function positionElements() {
 
     let hasOverflow = tempMaskWidth > textBoxWidth;
 
-    if (adjustWidth) {
+    // if (adjustWidth) {
 
-      // textBoxWidth = Math.min(textBoxWidth, maskWidth);
+    //   if (!hasOverflow) {
+    //     textBoxWidth = tempMaskWidth;
+    //   }
+    // }
 
-      if (!hasOverflow) {
-        textBoxWidth = tempMaskWidth;
-      }
+    if (adjustWidth && !hasOverflow) {
+      textBoxWidth = tempMaskWidth;
     }
 
     let maskWidth = textBoxWidth - padX * 2;
     let deltaX = startWidth - textBoxWidth;
-    let maskX = adjustWidth ? padX + deltaX : padX;
+    let maskX = adjustWidth && flipX ? padX + deltaX : padX;
+    // let maskX = padX;
+
+    if (textBoxWidth > maxWidth) {
+      maxWidth = textBoxWidth;
+    }
 
     gsap.set(textBoxMask, {
       width: maskWidth,
       x: maskX
-    })
+    });
 
-    console.log("\n")
-    // console.log("SUBHEADING", subheading)
-    // console.log("heading", headingChars)
-    // console.log("subheading", subheadingChars)
+    panel.iconX = -deltaX;
+    panel.bgScale = textBoxWidth / startWidth;
+
+    panel.headingOverlow = Math.max(0, headingWidth - maskWidth);
+    panel.subheadingOverlow = Math.max(0, subheadingWidth - maskWidth);
+
+    console.log("\n");
+    console.log("HEADING OVERFLOW", panel.headingOverlow)
+    console.log("SUBHEADING OVERFLOW", panel.subheadingOverlow)
 
     panel.targets = {
       icon, image, imageElement, textBox, textBoxText, textBoxMask, heading, headingChars, subheading, subheadingChars
     };
   });
 
+  const firstPanel = allPanels[0];
 
+  gsap.set(firstPanel.targets.icon, {
+    x: firstPanel.iconX
+  });
 
-
-
-}
-
-function _buildWidget() {
-
-  const textBoxes = [];
-  const icons = [];
-  const images = [];
-
-  popupHolder.innerHTML = html`
-    <div class="popup-content">
-      
-      <div class="popup-icons">
-        <div class="panel1 popup-icon">
-          <div class="popup-icon__background"></div>
-          <img class="popup-icon__image" src="../assets/icon-5.png">
-        </div>
-
-        <!--<div class="panel2 popup-icon">
-          <div class="popup-icon__background"></div>
-          <img class="popup-icon__image" src="../assets/icon-1.png">
-        </div>-->
-      </div>
-
-      <div class="popup-images">
-        <div class="megaPanel1 popup-image">
-          <div class="popup-image__background"></div>
-          <img class="popup-image__image" src="../assets/image-1.jpg">
-        </div>
-
-        <div class="megaPanel2 popup-image">
-          <div class="popup-image__background"></div>
-          <img class="popup-image__image" src="../assets/image-3.png">
-        </div>
-      </div>
-
-      <div class="popup-background"></div>
-      
-      <div class="popup-text-boxes">
-        <div class="popup-text-box">
-          <div class="popup-text-box__mask">
-            <div class="popup-text-box__text">
-              <div class="popup-text-box__heading">
-                @NERDORDIELONGERNAME
-              </div>
-              <div class="popup-text-box__subheading">
-                make sure to follow me on twitter!
-              </div>
-            </div>
-          </div>          
-        </div>
-
-        <!--<div class="popup-text-box">
-          <div class="popup-text-box__mask">
-            <div class="popup-text-box__text">
-              <div class="popup-text-box__heading">
-                WHAT ARE YOU DOING SON?
-              </div>
-              <div class="popup-text-box__subheading">
-                what the heck is going on here?
-              </div>
-            </div>
-          </div>          
-        </div>
-
-        <div class="popup-text-box">
-          <div class="popup-text-box__mask">
-            <div class="popup-text-box__text">
-              <div class="popup-text-box__heading">
-                A single heading just to test some stuff out
-              </div>
-            </div>
-          </div>          
-        </div>-->
-
-
-      </div>
-    </div>
-  `;
-
-  var split = new SplitText(".popup-text-box__heading, .popup-text-box__subheading", {
-    type: "chars"
-  })
-
-  var text1 = select(".popup-text-box__text");
-  var rect = text1.getBoundingClientRect();
-
-  if (rect.height > settings.textBoxHeight) {
-
-    // var scale = settings.textBoxHeight / (rect.height + settings.textBoxPadY * 2);
-    var scale = (settings.textBoxHeight - settings.textBoxPadY * 2) / rect.height;
-
-    gsap.set(text1, {
-      scale
-    })
-  }
-
-  gsap.set(".popup-text-box__mask", {
-    x: settings.textBoxPadX
-  })
+  gsap.set(popupBackground, {
+    scaleX: firstPanel.bgScale
+  });
 
   gsap.set(".popup-text-box__text", {
     yPercent: -50
   });
 
-  if (settings.flipX) {
+  if (flipX) {
 
     gsap.set(popupHolder, {
       rotationY: 180
     });
 
-    // gsap.set(".popup-icon__image, .popup-image__image, .popup-text-boxes", {
-      // gsap.set(".popup-icon__image, .popup-image__image, .popup-text-box__mask", {
-      // gsap.set(".popup-icon__image, .popup-image__image, .popup-text-boxes", {
-      // gsap.set(".popup-icon, .popup-image, .popup-text-boxes", {
-      gsap.set(".popup-icon__image, .popup-image__image, .popup-image__background, .popup-text-boxes", {
+    gsap.set(".popup-icon__image, .popup-image__image, .popup-image__background, .popup-text-boxes", {
       rotationY: 180
     });
   }
 
-  if (settings.flipY) {
+  if (flipY) {
 
     gsap.set(popupHolder, {
       rotationX: 180
     });
 
-    // gsap.set(".popup-icon__image, .popup-image__image, .popup-text-boxes", {
-    // gsap.set(".popup-icon, .popup-image, .popup-text-boxes", {
     gsap.set(".popup-icon__image, .popup-image__image, .popup-image__background, .popup-text-boxes", {
       rotationX: 180
     });
   }
+}
 
+function buildAnimation() {
+  
   gsap.to(popupHolder, {
     duration: 0.1,
     autoAlpha: 1

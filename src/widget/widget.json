@@ -1,14 +1,20 @@
 {
   "showDuration": {
     "label": "Show duration",
-    "type": "number",
+    "type": "slider",
     "value": 1,
+    "min": 0.5,
+    "max": 5,
+    "steps": 0.1,
     "folder": "Animation settings"
   },
   "replayWait": {
     "label": "Replay wait",
-    "type": "number",
+    "type": "slider",
     "value": 1,
+    "min": 0.5,
+    "max": 5,
+    "steps": 0.1,
     "folder": "Animation settings"
   },
   
@@ -39,14 +45,20 @@
   },  
   "maxTextBoxWidth": {
     "label": "Max text box width",
-    "type": "number",
+    "type": "slider",
     "value": 800,
+    "min": 400,
+    "max": 1000,
+    "steps": 1,
     "folder": "Layout and style"
   },
   "textBoxHeight": {
     "label": "Text box height",
-    "type": "number",
+    "type": "slider",
     "value": 100,
+    "min": 50,
+    "max": 150,
+    "steps": 1,
     "folder": "Layout and style"
   },
   "flipX": {
@@ -92,14 +104,20 @@
   },  
   "maxImageWidth": {
       "label": "Max image width",
-      "type": "number",
+      "type": "slider",
       "value": 800,
+      "min": 100,
+      "max": 1000,
+      "steps": 1,
       "folder": "Layout and style"
   },
   "maxImageHeight": {
       "label": "Max image height",
-      "type": "number",
+      "type": "slider",
       "value": 800,
+      "min": 100,
+      "max": 1000,
+      "steps": 1,
       "folder": "Layout and style"
   },
 

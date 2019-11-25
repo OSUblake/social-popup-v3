@@ -9,6 +9,8 @@ import fontOptions from "./font-options.js";
 import Store from "./store.js";
 import parseTemplate from "./parse-template.js";
 
+let requestId = null;
+
 const settingsStore = new Store("scocialPopup1");
 
 const urls = [
@@ -44,8 +46,18 @@ let settings, defaultSettings, controllers, folders;
 let template, compile;
 
 const onChange = throttle(update, 8);
+// const onChange = throttle(requestUpdate, 8);
 
 init();
+
+function requestUpdate() {
+  
+  // iframe.srcdoc = "";
+
+  if (!requestId) {
+    requestId = requestAnimationFrame(update);
+  }
+}
 
 async function init() {
 
@@ -108,6 +120,7 @@ async function init() {
   }
 
   update();
+  // requestUpdate();
 }
 
 function update() {
@@ -122,6 +135,8 @@ function update() {
   eventTarget.dispatchEvent(event);
 
   settingsStore.set(settings);
+
+  requestId = null;
 }
 
 function resetSettings() {
@@ -136,6 +151,7 @@ function resetSettings() {
   });
 
   update();
+  // requestUpdate();
 }
 
 function restoreSettings() {
@@ -193,6 +209,7 @@ function buildGui(gui, fields) {
       controller = folder.add(settings, key); 
     }
 
+    // controller.onChange(requestUpdate);
     controller.onChange(onChange);
     controllers.set(key, controller);
   });
