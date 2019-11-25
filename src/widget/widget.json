@@ -12,7 +12,6 @@
     "folder": "Animation settings"
   },
   
-
   "backgroundColor": {
     "label": "Background color",
     "type": "colorpicker",
@@ -182,9 +181,9 @@
   "numPanels": {
       "label": "Number of standard panels",
       "type": "slider",
-      "value": 6,
+      "value": 5,
       "min": 0,
-      "max": 6,
+      "max": 5,
       "steps": 1,
       "folder": "Standard Panels"
   },
@@ -359,47 +358,13 @@
     "steps": 0.01,
     "folder": ["Standard Panels", "Panel 5"]
   },
-  
-  "panel6_heading": {
-    "label": "Panel 6 heading",
-    "type": "text",
-    "value": "",
-    "folder": ["Standard Panels", "Panel 6"]
-  },
-  "panel6_subheading": {
-    "label": "Panel 6 subheading",
-    "type": "text",
-    "value": "",
-    "folder": ["Standard Panels", "Panel 6"]
-  },
-  "panel6_icon": {
-    "label": "Panel 6 icon",
-    "type": "image-input",
-    "value": "",
-    "folder": ["Standard Panels", "Panel 6"]
-  },
-  "panel6_iconColor": {
-    "label": "Panel 6 icon  color",
-    "type": "colorpicker",
-    "value": "#181818",
-    "folder": ["Standard Panels", "Panel 6"]
-  },
-  "panel6_iconOpacity": {
-    "label": "Panel 6 icon background opacity",
-    "type": "slider",
-    "value": 1,
-    "min": 0,
-    "max": 1,
-    "steps": 0.01,
-    "folder": ["Standard Panels", "Panel 6"]
-  },
-  
+    
   "numMegaPanels": {
       "label": "Number of mega panels",
       "type": "slider",
-      "value": 4,
+      "value": 2,
       "min": 0,
-      "max": 4,
+      "max": 2,
       "steps": 1,
       "folder": "Mega Panels"
   },
@@ -512,115 +477,5 @@
     "max": 1,
     "steps": 0.01,
     "folder": ["Mega Panels", "Mega Panel 2"]
-  },
-  
-  "megaPanel3_heading": {
-    "label": "Mega panel 3 heading",
-    "type": "text",
-    "value": "",
-    "folder": ["Mega Panels", "Mega Panel 3"]
-  },
-  "megaPanel3_subheading": {
-    "label": "Mega panel 3 subheading",
-    "type": "text",
-    "value": "",
-    "folder": ["Mega Panels", "Mega Panel 3"]
-  },
-  "megaPanel3_icon": {
-    "label": "Mega panel 3 icon",
-    "type": "image-input",
-    "value": "",
-    "folder": ["Mega Panels", "Mega Panel 3"]
-  },
-  "megaPanel3_iconColor": {
-    "label": "Mega panel 3 icon background color",
-    "type": "colorpicker",
-    "value": "#181818",
-    "folder": ["Mega Panels", "Mega Panel 3"]
-  },
-  "megaPanel3_iconOpacity": {
-    "label": "Mega panel 3 icon background opacity",
-    "type": "slider",
-    "value": 1,
-    "min": 0,
-    "max": 1,
-    "steps": 0.01,
-    "folder": ["Mega Panels", "Mega Panel 3"]
-  },
-  "megaPanel3_image": {
-    "label": "Mega panel 3 image",
-    "type": "image-input",
-    "value": "",
-    "folder": ["Mega Panels", "Mega Panel 3"]
-  },
-  "megaPanel3_imageColor": {
-    "label": "Mega panel 3 image background color",
-    "type": "colorpicker",
-    "value": "#ffffff",
-    "folder": ["Mega Panels", "Mega Panel 3"]
-  },
-  "megaPanel3_imageOpacity": {
-    "label": "Mega panel 3 image background opacity",
-    "type": "slider",
-    "value": 1,
-    "min": 0,
-    "max": 1,
-    "steps": 0.01,
-    "folder": ["Mega Panels", "Mega Panel 3"]
-  },
-  
-  "megaPanel4_heading": {
-    "label": "Mega panel 4 heading",
-    "type": "text",
-    "value": "",
-    "folder": ["Mega Panels", "Mega Panel 4"]
-  },
-  "megaPanel4_subheading": {
-    "label": "Mega panel 4 subheading",
-    "type": "text",
-    "value": "",
-    "folder": ["Mega Panels", "Mega Panel 4"]
-  },
-  "megaPanel4_icon": {
-    "label": "Mega panel 4 icon",
-    "type": "image-input",
-    "value": "",
-    "folder": ["Mega Panels", "Mega Panel 4"]
-  },
-  "megaPanel4_iconColor": {
-    "label": "Mega panel 4 icon background color",
-    "type": "colorpicker",
-    "value": "#181818",
-    "folder": ["Mega Panels", "Mega Panel 4"]
-  },
-  "megaPanel4_iconOpacity": {
-    "label": "Mega panel 4 icon background opacity",
-    "type": "slider",
-    "value": 1,
-    "min": 0,
-    "max": 1,
-    "steps": 0.01,
-    "folder": ["Mega Panels", "Mega Panel 4"]
-  },
-  "megaPanel4_image": {
-    "label": "Mega panel 4 image",
-    "type": "image-input",
-    "value": "",
-    "folder": ["Mega Panels", "Mega Panel 4"]
-  },
-  "megaPanel4_imageColor": {
-    "label": "Mega panel 4 image background color",
-    "type": "colorpicker",
-    "value": "#ffffff",
-    "folder": ["Mega Panels", "Mega Panel 4"]
-  },
-  "megaPanel4_imageOpacity": {
-    "label": "Mega panel 4 image background opacity",
-    "type": "slider",
-    "value": 1,
-    "min": 0,
-    "max": 1,
-    "steps": 0.01,
-    "folder": ["Mega Panels", "Mega Panel 4"]
-  }
+  }  
 }

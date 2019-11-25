@@ -28,8 +28,16 @@ async function buildWidgets() {
   config = JSON.parse(config);
   fields = JSON.parse(json);
 
+  html = prettier.format(html, {
+    parser: "html"
+  });
+
   css = prettier.format(css, {
     parser: "css"
+  });
+
+  js = prettier.format(js, {
+    parser: "babel"
   });
   
   const tags = config.tags || ["$_","_$"];
@@ -153,15 +161,9 @@ async function createStreamlabs({ fields, config, compile }) {
     parser: "json-stringify"
   });
 
-  const html = prettier.format(compile.html(settings), {
-    parser: "html"
-  });
-
-  const js = prettier.format(compile.js(settings), {
-    parser: "babel"
-  });
-
+  const html = compile.html(settings);
   const css = compile.css(settings);
+  const js = compile.js(settings);
 
   await Promise.all([
     writeFile(streamlabsDir, "widget.html", html),
@@ -270,15 +272,9 @@ async function createStreamElements({ fields, config, compile }) {
     parser: "json-stringify"
   });
 
-  const html = prettier.format(compile.html(settings), {
-    parser: "html"
-  });
-
-  const js = prettier.format(compile.js(settings), {
-    parser: "babel"
-  });
-
+  const html = compile.html(settings);
   const css = compile.css(settings);
+  const js = compile.js(settings);
 
   await Promise.all([
     writeFile(streamElementsDir, "widget.html", html),

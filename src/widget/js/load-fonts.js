@@ -7,24 +7,16 @@ export default function(font1, font2) {
     font1 = font1.trim().replace(/\s+/g, "+");
     font2 = font2.trim().replace(/\s+/g, "+");
 
-    link.onload = fulfill;
+    // allow to resolve on error
     link.onerror = fulfill;
+    link.onload = fulfill;
     link.rel = "stylesheet";
     link.href = `https://fonts.googleapis.com/css?family=${font1}|${font2}&display=swap`;
 
     function fulfill(event) {
-
       link.onload = undefined;
       link.onerror = undefined;
-
-      resolve();
-
-      // if (event.type === "error") {
-      //   reject(link);
-      // } else {
-      //   resolve(link);
-      // }
-      // resolve(link);
+      resolve(link);
     }
   });
 }

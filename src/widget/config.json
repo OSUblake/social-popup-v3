@@ -57,17 +57,7 @@
         "value": "make sure to follow me on twitter!"
       },
       "panel5_icon": {
-        "value": "../assets/icon-1.png"
-      },
-
-      "panel6_heading": {
-        "value": "@NERDSPWN"
-      },
-      "panel6_subheading": {
-        "value": "make sure to follow me on twitter!"
-      },
-      "panel6_icon": {
-        "value": "../assets/icon-1.png"
+        "value": "../assets/icon-5.png"
       },
 
       "megaPanel1_heading": {
@@ -80,7 +70,7 @@
         "value": "../assets/icon-1.png"
       },
       "megaPanel1_image": {
-        "value": "../assets/icon-1.png"
+        "value": "../assets/image-1.jpg"
       },
 
       "megaPanel2_heading": {
@@ -93,33 +83,7 @@
         "value": "../assets/icon-1.png"
       },
       "megaPanel2_image": {
-        "value": "../assets/icon-1.png"
-      },
-
-      "megaPanel3_heading": {
-        "value": "@NERDSPWN"
-      },
-      "megaPanel3_subheading": {
-        "value": "make sure to follow me on twitter!"
-      },
-      "megaPanel3_icon": {
-        "value": "../assets/icon-1.png"
-      },
-      "megaPanel3_image": {
-        "value": "../assets/icon-1.png"
-      },
-
-      "megaPanel4_heading": {
-        "value": "@NERDSPWN"
-      },
-      "megaPanel4_subheading": {
-        "value": "make sure to follow me on twitter!"
-      },
-      "megaPanel4_icon": {
-        "value": "../assets/icon-1.png"
-      },
-      "megaPanel4_image": {
-        "value": "../assets/icon-1.png"
+        "value": "../assets/image-3.png"
       }
     }
   },
@@ -151,9 +115,6 @@
       "panel5_iconBackgroundOpacity": {
         "type": "remove"
       },
-      "panel6_iconBackgroundOpacity": {
-        "type": "remove"
-      },
       "megaPanel1_iconBackgroundOpacity": {
         "type": "remove"
       },
@@ -164,18 +125,6 @@
         "type": "remove"
       },
       "megaPanel2_imageBackgroundOpacity": {
-        "type": "remove"
-      },
-      "megaPanel3_iconBackgroundOpacity": {
-        "type": "remove"
-      },
-      "megaPanel3_imageBackgroundOpacity": {
-        "type": "remove"
-      },
-      "megaPanel4_iconBackgroundOpacity": {
-        "type": "remove"
-      },
-      "megaPanel4_imageBackgroundOpacity": {
         "type": "remove"
       }
     }

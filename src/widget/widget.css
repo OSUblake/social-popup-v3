@@ -21,18 +21,27 @@
   --panel1_iconColor: $_panel1_iconColor_$;
   --panel1_iconOpacity: $_panel1_iconOpacity_$;
 
+  --panel2_iconColor: $_panel2_iconColor_$;
+  --panel2_iconOpacity: $_panel2_iconOpacity_$;
+
+  --panel3_iconColor: $_panel3_iconColor_$;
+  --panel3_iconOpacity: $_panel3_iconOpacity_$;
+
+  --panel4_iconColor: $_panel4_iconColor_$;
+  --panel4_iconOpacity: $_panel4_iconOpacity_$;
+
+  --panel5_iconColor: $_panel5_iconColor_$;
+  --panel5_iconOpacity: $_panel5_iconOpacity_$;
+
   --megaPanel1_iconColor: $_megaPanel1_iconColor_$;
   --megaPanel1_iconOpacity: $_megaPanel1_iconOpacity_$;
   --megaPanel1_imageColor: $_megaPanel1_imageColor_$;
   --megaPanel1_imageOpacity: $_megaPanel1_imageOpacity_$;
-}
 
-.fill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  --megaPanel2_iconColor: $_megaPanel2_iconColor_$;
+  --megaPanel2_iconOpacity: $_megaPanel2_iconOpacity_$;
+  --megaPanel2_imageColor: $_megaPanel2_imageColor_$;
+  --megaPanel2_imageOpacity: $_megaPanel2_imageOpacity_$;
 }
 
 .popup-holder, .popup-holder * {
@@ -72,7 +81,47 @@
 }
 
 .popup-text-box {
+  top: 0;
+  left: 0;
+  position: absolute;
 
+  height: 100%;
+  width: 100%;
+}
+
+.popup-text-box__text {
+  position: absolute;
+  /* height: 100%; */
+  top: 50%;
+  transform-origin: left center;
+  /* padding: 0 6px; */
+}
+
+.popup-text-box__mask {
+  overflow: hidden;
+  white-space: nowrap;
+
+  height: 100%;
+  border: 1px solid red;
+  width: 200px;
+}
+
+.popup-text-box__heading {
+  font-family: var(--headingFont);
+  font-weight: var(--headingFontWeight);
+  font-size: var(--headingFontSize);
+  color: var(--headingColor);
+
+  outline: 1px solid pink;
+}
+
+.popup-text-box__subheading {
+  font-family: var(--subheadingFont);
+  font-weight: var(--subheadingFontWeight);
+  font-size: var(--subheadingFontSize);
+  color: var(--subheadingColor);
+
+  outline: 1px solid purple;
 }
 
 .popup-icons {
@@ -100,11 +149,6 @@
   height: 100%;
 }
 
-.panel1 .popup-icon__background {
-  background-color: var(--panel1_iconColor);
-  opacity: var(--panel1_iconOpacity);
-}
-
 .popup-icon__image {
   width: 50%;
   height: 50%;
@@ -115,12 +159,12 @@
   position: absolute;
   top: 0;
   left: 0;
-
-  /* width: var(--maxImageWidth); */
-  /* height: var(--maxImageHeight); */
 }
 
 .popup-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   transform: translateY(-100%);
 }
 
@@ -132,26 +176,62 @@
   height: 100%;
 }
 
-.megaPanel1 .popup-image__background {
-  background-color: var(--megaPanel1_imageColor);
-  opacity: var(--megaPanel1_imageOpacity);
+.megaPanel1.popup-image {
+  z-index: 0;
+}
+
+.megaPanel2.popup-image {
+  z-index: 1;
 }
 
 .popup-image__image {
   max-width: var(--maxImageWidth);
   max-height: var(--maxImageHeight);
+
+  vertical-align: top;
 }
 
-.heading {
-  font-family: var(--headingFont);
-  font-weight: var(--headingFontWeight);
-  font-size: var(--headingFontSize);
-  color: var(--headingColor);
+.panel1 .popup-icon__background {
+  background-color: var(--panel1_iconColor);
+  opacity: var(--panel1_iconOpacity);
 }
 
-.subheading {
-  font-family: var(--subheadingFont);
-  font-weight: var(--subheadingFontWeight);
-  font-size: var(--subheadingFontSize);
-  color: var(--subheadingColor);
+.panel2 .popup-icon__background {
+  background-color: var(--panel2_iconColor);
+  opacity: var(--panel2_iconOpacity);
+}
+
+.panel3 .popup-icon__background {
+  background-color: var(--panel3_iconColor);
+  opacity: var(--panel3_iconOpacity);
+}
+
+.panel4 .popup-icon__background {
+  background-color: var(--panel4_iconColor);
+  opacity: var(--panel4_iconOpacity);
+}
+
+.panel5 .popup-icon__background {
+  background-color: var(--panel5_iconColor);
+  opacity: var(--panel5_iconOpacity);
+}
+
+.megaPanel1 .popup-icon__background {
+  background-color: var(--megaPanel1_iconColor);
+  opacity: var(--megaPanel1_iconOpacity);
+}
+
+.megaPanel2 .popup-icon__background {
+  background-color: var(--megaPanel2_iconColor);
+  opacity: var(--megaPanel2_iconOpacity);
+}
+
+.megaPanel1 .popup-image__background {
+  background-color: var(--megaPanel1_imageColor);
+  opacity: var(--megaPanel1_imageOpacity);
+}
+
+.megaPanel2 .popup-image__background {
+  background-color: var(--megaPanel2_imageColor);
+  opacity: var(--megaPanel2_imageOpacity);
 }

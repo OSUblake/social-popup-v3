@@ -19,7 +19,7 @@ function loadImage(panel, prop) {
   return new Promise((resolve, reject) => {
 
     const image = new Image();
-    image.onerror = fulfill;
+    image.onerror = reject;
     image.onload = fulfill;
     image.src = panel[prop];
 
@@ -32,21 +32,13 @@ function loadImage(panel, prop) {
       const height = image.naturalHeight || image.height;
 
       if (!width) {
-        panel[prop] = "";
-      } else if (prop === "image") {
+        return reject("Image is bad");
+      } 
+      
+      if (prop === "image") {
         panel.imageWidth = width;
         panel.imageHeight = height;
       }
-
-      // if (!width) {
-      //   // panel[prop] = "";
-      //   return reject(image);
-      // }
-
-      // if (prop === "image") {
-      //   panel.imageWidth = width;
-      //   panel.imageHeight = height;
-      // }
 
       resolve(image);
     }

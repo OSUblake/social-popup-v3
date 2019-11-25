@@ -1,16 +1,19 @@
 export default {
   flipX: $_flipX_$,
   flipY: $_flipY_$,
-  showDuration: Number("$_showDuration_$"),
-  replayWait: Number("$_replayWait_$"),
+  textBoxPadX: 30,
+  textBoxPadY: 6,
+  textBoxWidth: Number($_maxTextBoxWidth_$),
+  textBoxHeight: Number($_textBoxHeight_$),
+  showDuration: Number($_showDuration_$),
+  replayWait: Number($_replayWait_$),
   widthAdjust: "$_widthAdjust_$",
-  maxWidth: Number("$_maxWidth_$"),
-  maxImageWidth: Number("$_maxImageWidth_$"),
-  maxImageHeight: Number("$_maxImageHeight_$"),
+  maxImageWidth: Number($_maxImageWidth_$),
+  maxImageHeight: Number($_maxImageHeight_$),
   headingFont: "$_headingFont_$",
   subheadingFont: "$_subheadingFont_$",
-  numPanels: Number("$_numPanels_$"),
-  numMegaPanels: Number("$_numMegaPanels_$"),
+  numPanels: Number($_numPanels_$),
+  numMegaPanels: Number($_numMegaPanels_$),
   panels: [
     {
       id: "panel1",
@@ -41,12 +44,6 @@ export default {
       heading: "$_panel5_heading_$",
       subheading: "$_panel5_subheading_$",
       icon: "$_panel5_icon_$"
-    },
-    {
-      id: "panel6",
-      heading: "$_panel6_heading_$",
-      subheading: "$_panel6_subheading_$",
-      icon: "$_panel6_icon_$"
     }
   ],
   megaPanels: [
@@ -63,20 +60,6 @@ export default {
       subheading: "$_megaPanel2_subheading_$",
       icon: "$_megaPanel2_icon_$",
       image: "$_megaPanel2_image_$",
-    },
-    {
-      id: "megaPanel3",
-      heading: "$_megaPanel3_heading_$",
-      subheading: "$_megaPanel3_subheading_$",
-      icon: "$_megaPanel3_icon_$",
-      image: "$_megaPanel3_image_$",
-    },
-    {
-      id: "megaPanel4",
-      heading: "$_megaPanel4_heading_$",
-      subheading: "$_megaPanel4_subheading_$",
-      icon: "$_megaPanel4_icon_$",
-      image: "$_megaPanel4_image_$",
     }
   ]
 };

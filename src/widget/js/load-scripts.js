@@ -6,20 +6,14 @@ function loadScript(src) {
     const script = document.createElement("script");
     document.head.appendChild(script);
 
+    script.onerror = reject;
     script.onload = fulfill;
-    script.onerror = fulfill;
     script.src = src;
 
     function fulfill(event) {
-
       script.onload = undefined;
       script.onerror = undefined;
-
-      if (event.type === "error") {
-        reject(script);
-      } else {
-        resolve(script);
-      }
+      resolve(script);
     }
   });
 }
