@@ -106,6 +106,9 @@ function positionElements() {
 
   const maxTextBoxHeight = (settings.textBoxHeight - padY * 2);
 
+  const maxImageWidth = Math.min(settings.maxImageWidth, startWidth);
+  const maxImageHeight = Math.min(settings.maxImageHeight, startWidth);
+
   const split = new SplitText(".popup-text-box__heading, .popup-text-box__subheading", {
     type: "chars"
   });
@@ -143,15 +146,39 @@ function positionElements() {
     const subheadingWidth = subheading ? subheading.getBoundingClientRect().width : headingWidth;
     const textWidth = Math.max(headingWidth, subheadingWidth);
 
+    let textBoxWidth = startWidth;
     let tempMaskWidth = textWidth + padX * 2;
 
-    let textBoxWidth = startWidth;
+    if (imageElement) {
+
+      const sx = maxImageWidth / panel.imageWidth;
+      const sy = maxImageHeight / panel.imageHeight;
+
+      const scale = Math.min(sx, sy);
+      
+      panel.imageWidth *= scale;
+      panel.imageHeight *= scale;      
+
+      if (adjustWidth) {
+        textBoxWidth = Math.max(panel.imageWidth, textBoxWidth);
+      }
+
+      if (panel.imageWidth > tempMaskWidth) {
+        tempMaskWidth = panel.imageWidth;
+      }
+
+      imageElement.style.width = panel.imageWidth + "px";
+      imageElement.style.height = panel.imageHeight + "px";
+    }
+
+    // let tempMaskWidth = textWidth + padX * 2;
+    // let textBoxWidth = startWidth;
 
     let hasOverflow = tempMaskWidth > textBoxWidth;
 
     if (adjustWidth && !hasOverflow) {
       textBoxWidth = tempMaskWidth;
-    }
+    }   
 
     let maskWidth = textBoxWidth - padX * 2;
     let deltaX = startWidth - textBoxWidth;

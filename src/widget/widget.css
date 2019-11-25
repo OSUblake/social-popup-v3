@@ -93,21 +93,16 @@
 .popup-text-box__mask {
   overflow: hidden;
   white-space: nowrap;
-
   height: 100%;
+
   border: 1px solid red;
   width: 200px;
 }
 
 .popup-text-box__text {
   position: absolute;
-  /* height: 100%; */
   top: 50%;
   transform-origin: left center;
-  /* padding: 0 6px; */
-
-  /* display: flex; */
-  /* flex-direction: column; */
 }
 
 .popup-text-box__heading {
@@ -119,7 +114,6 @@
   outline: 1px solid pink;
 
   display: inline;
-  /* display: inline-flex; */
 }
 
 .popup-text-box__subheading {
@@ -131,7 +125,6 @@
   outline: 1px solid purple;
 
   display: inline;
-  /* display: inline-flex; */
 }
 
 .popup-icons {
