@@ -5,8 +5,7 @@ import loadImages from "./js/load-images.js";
 import loadScripts from "./js/load-scripts.js";
 import settings from "./js/settings.js";
 
-// (!) COMMENT THIS OUT BEFORE BUILD
-import "./js/scrub-timeline.js";
+// import "./js/scrub-timeline.js";
 
 const scriptPaths = [$_scripts_$];
 
@@ -20,8 +19,6 @@ let megaPanels = settings.megaPanels
 
 let allPanels = [...panels, ...megaPanels];
 
-// const rootProps = gsap.getProperty("html");
-const root = select("html");
 const popupHolder = select(".popup-holder");
 let popupContent, popupBackground;
 
@@ -91,11 +88,6 @@ function buildWidget() {
 
   positionElements();
   buildAnimation();
-
-  // requestAnimationFrame(() => {
-  //   positionElements();
-  //   buildAnimations();
-  // });
 }
 
 function positionElements() {
@@ -117,6 +109,11 @@ function positionElements() {
   const split = new SplitText(".popup-text-box__heading, .popup-text-box__subheading", {
     type: "chars"
   });
+
+  // force repaint?
+  // popupContent.style.display = "none";
+  // popupContent.offsetHeight;
+  // popupContent.style.display = "block";
   
   allPanels.forEach(panel => {
 
@@ -133,21 +130,14 @@ function positionElements() {
     const subheading = select(".popup-text-box__subheading", textBox);
     const subheadingChars = selectAll(".popup-text-box__subheading > *", textBox);
 
-    // popupContent.style.display = "none";
-    // popupContent.offsetHeight;
-    // popupContent.style.display = "block";
-
     const textBounds = textBoxText.getBoundingClientRect();
 
-    // if (textBounds.height > settings.textBoxHeight) {
     if (textBounds.height > maxTextBoxHeight) {
 
       const scale = maxTextBoxHeight / textBounds.height;
   
       gsap.set(textBoxText, { scale });
-    }
-
-    
+    }   
 
     const headingWidth = heading.getBoundingClientRect().width;
     const subheadingWidth = subheading ? subheading.getBoundingClientRect().width : headingWidth;
@@ -159,13 +149,6 @@ function positionElements() {
 
     let hasOverflow = tempMaskWidth > textBoxWidth;
 
-    // if (adjustWidth) {
-
-    //   if (!hasOverflow) {
-    //     textBoxWidth = tempMaskWidth;
-    //   }
-    // }
-
     if (adjustWidth && !hasOverflow) {
       textBoxWidth = tempMaskWidth;
     }
@@ -173,7 +156,6 @@ function positionElements() {
     let maskWidth = textBoxWidth - padX * 2;
     let deltaX = startWidth - textBoxWidth;
     let maskX = adjustWidth && flipX ? padX + deltaX : padX;
-    // let maskX = padX;
 
     if (textBoxWidth > maxWidth) {
       maxWidth = textBoxWidth;
@@ -190,9 +172,10 @@ function positionElements() {
     panel.headingOverlow = Math.max(0, headingWidth - maskWidth);
     panel.subheadingOverlow = Math.max(0, subheadingWidth - maskWidth);
 
-    console.log("\n");
-    console.log("HEADING OVERFLOW", panel.headingOverlow)
-    console.log("SUBHEADING OVERFLOW", panel.subheadingOverlow)
+    // console.log("\n");
+    // console.log("TEXT HEIGHT", textBounds.height)
+    // console.log("HEADING OVERFLOW", panel.headingOverlow)
+    // console.log("SUBHEADING OVERFLOW", panel.subheadingOverlow)
 
     panel.targets = {
       icon, image, imageElement, textBox, textBoxText, textBoxMask, heading, headingChars, subheading, subheadingChars

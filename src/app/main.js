@@ -50,10 +50,7 @@ const onChange = throttle(update, 8);
 
 init();
 
-function requestUpdate() {
-  
-  // iframe.srcdoc = "";
-
+function requestUpdate() {  
   if (!requestId) {
     requestId = requestAnimationFrame(update);
   }
@@ -120,23 +117,31 @@ async function init() {
   }
 
   update();
-  // requestUpdate();
 }
 
 function update() {
 
-  iframe.srcdoc = compile(settings);    
+  const src = compile(settings);
+  
+  if (requestId) {
+    cancelAnimationFrame(requestId);
+  }
 
-  const event = new CustomEvent(settings.loadEvent, {
-    detail: "hello"
+  requestId = requestAnimationFrame(() => {
+
+    iframe.srcdoc = src; 
+
+    const event = new CustomEvent(settings.loadEvent, {
+      detail: "hello"
+    });
+  
+    const eventTarget = iframe[`content${upperFirst(settings.eventTarget)}`];
+    eventTarget.dispatchEvent(event);
+
+    requestId = null;
   });
 
-  const eventTarget = iframe[`content${upperFirst(settings.eventTarget)}`];
-  eventTarget.dispatchEvent(event);
-
   settingsStore.set(settings);
-
-  requestId = null;
 }
 
 function resetSettings() {
@@ -151,7 +156,6 @@ function resetSettings() {
   });
 
   update();
-  // requestUpdate();
 }
 
 function restoreSettings() {
