@@ -100,6 +100,7 @@ function buildWidget() {
 
 function positionElements() {
 
+  popupContent = select(".popup-content");
   popupBackground = select(".popup-background");
 
   let maxWidth = -Infinity;
@@ -110,6 +111,8 @@ function positionElements() {
   const padY = settings.textBoxPadY;
   const flipX = settings.flipX;
   const flipY = settings.flipY;
+
+  const maxTextBoxHeight = (settings.textBoxHeight - padY * 2);
 
   const split = new SplitText(".popup-text-box__heading, .popup-text-box__subheading", {
     type: "chars"
@@ -130,14 +133,21 @@ function positionElements() {
     const subheading = select(".popup-text-box__subheading", textBox);
     const subheadingChars = selectAll(".popup-text-box__subheading > *", textBox);
 
+    // popupContent.style.display = "none";
+    // popupContent.offsetHeight;
+    // popupContent.style.display = "block";
+
     const textBounds = textBoxText.getBoundingClientRect();
 
-    if (textBounds.height > settings.textBoxHeight) {
+    // if (textBounds.height > settings.textBoxHeight) {
+    if (textBounds.height > maxTextBoxHeight) {
 
-      const scale = (settings.textBoxHeight - settings.textBoxPadY * 2) / textBounds.height;
+      const scale = maxTextBoxHeight / textBounds.height;
   
       gsap.set(textBoxText, { scale });
     }
+
+    
 
     const headingWidth = heading.getBoundingClientRect().width;
     const subheadingWidth = subheading ? subheading.getBoundingClientRect().width : headingWidth;
