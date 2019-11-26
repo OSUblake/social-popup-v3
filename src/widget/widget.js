@@ -392,7 +392,7 @@ function createAnimation() {
   CustomEase.create("easeInOut", "M0,0C0.16564702500000003,0,0.228405825,0.17109424,0.301725,0.371944,0.405767975,0.656453368,0.5314574750000001,1,1,1");
 
   gsap.defaults({
-    ease: "easeOut",
+    // ease: "easeOut",
     duration: 0.25
   });  
 
@@ -418,9 +418,10 @@ function createAnimation() {
     if (prevHeading) {
       
       tl.to(prevHeading, {
-        duration: 0.25,
-        y: `-=${textBoxHeight * 1.5 / panel.textScale}`,
-        ease: "easeInOut"
+        duration: 0.3,
+        y: `-=${textBoxHeight * 1 / panel.textScale}`,
+        // ease: "easeInOut",
+        ease: "power1"
       }, "start")
       .set(prevHeading, {
         autoAlpha: 0
@@ -430,11 +431,12 @@ function createAnimation() {
     if (prevSubheading) {
 
       tl.to(prevSubheading, {
-        duration: 0.25,
+        duration: 0.3,
         // duration: 0.125,
-        y: `-=${panel.headingHeight + textBoxHeight * 1.5 / panel.textScale}`,
-        ease: "easeInOut"
-      }, "start+=0.0625")
+        y: `-=${panel.headingHeight + textBoxHeight * 1 / panel.textScale}`,
+        // ease: "easeInOut",
+        ease: "power1"
+      }, "start+=0.15")
       .set(prevSubheading, {
         autoAlpha: 0
       }, ">");
@@ -465,37 +467,41 @@ function createAnimation() {
     headingTl.set(heading, {
       autoAlpha: 1
     })
-    .to(heading, {
-      duration: 0.25,
-      y: 0
-    }, 0)
+    // .to(heading, {
+    //   duration: 0.25,
+    //   y: 0
+    // }, 0)
     .to(headingChars, {
-      duration: 0.25,
+      duration: 0.08,
       opacity: 1,
-      yPercent: 0,
+      // yPercent: 0,
       y: 0,
+      ease: "power1",
       stagger: {
-        each: 0.125,
+        each: 0.03,
       }
     }, 0);
     
-
     if (subheading) {
 
       subheadingTl.set(subheading, {
         autoAlpha: 1
       })
       .to(subheadingChars, {
-        duration: 0.25,
+        duration: 0.08,
         opacity: 1,
+        ease: "power1",
         stagger: {
-          each: 0.125,
+          each: 0.03,
         }
       });
     }
 
-    headingTl.duration(0.5);
-    subheadingTl.duration(0.5);
+    const headingDuration = headingTl.duration();
+    const subheadingDuration = subheadingTl.duration();
+
+    // headingTl.duration(0.75);
+    // subheadingTl.duration(0.75);
 
     tl.add(headingTl, "resize+=0.5");
     tl.add(subheadingTl, "resize+=0.75");
@@ -506,7 +512,8 @@ function createAnimation() {
         duration: Math.max(minOverflowDuration, panel.headingOverlow / overflowSpeed),
         x: -panel.headingOverlow / panel.textScale,
         ease: "none",
-      }, "resize+=1");
+      }, `resize+=${0.5 + headingDuration * 0.8}`);
+      // }, "resize+=1");
     }
 
     if (subheading && panel.subheadingOverlow) {
@@ -515,7 +522,8 @@ function createAnimation() {
         duration: Math.max(minOverflowDuration, panel.subheadingOverlow / overflowSpeed),
         x: -panel.subheadingOverlow / panel.textScale,
         ease: "none",
-      }, "resize+=1.25");
+      }, `resize+=${0.75 + subheadingDuration * 0.8}`);
+      // }, "resize+=1.25");
     }
     
     if (icon) {
