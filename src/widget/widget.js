@@ -109,6 +109,10 @@ function redraw(...targets) {
 
 function positionElements() {
 
+  gsap.config({
+    nullTargetWarn: false
+  });
+
   popupBackground = select(".popup-background");
   popupContent = select(".popup-content");
   popupIcons = select(".popup-icons");
@@ -126,7 +130,7 @@ function positionElements() {
   const imageHeight = Math.min(settings.maxImageHeight, startWidth);
 
   const imageAlign = settings.imageAlign;
-  let maxImageHeight = -Infinity;
+  let maxImageHeight = 0;
 
   const headingSplit = new SplitText(".popup-text-box__heading", {
     type: "chars"
@@ -269,6 +273,10 @@ function positionElements() {
     // gsap.set(heading, {
     //   y: `+=${15 / panel.textScale}`
     // });
+
+    gsap.set(headingChars, {
+      y: `+=${15 / panel.textScale}`
+    });
   });
 
   const firstPanel = allPanels[0];
@@ -305,7 +313,7 @@ function positionElements() {
 
   gsap.set(headingSplit.chars, {
     opacity: 0,
-    yPercent: 25
+    // yPercent: 25
   });
 
   gsap.set(subheadingSplit.chars, {
@@ -460,6 +468,7 @@ function createAnimation() {
       duration: 0.25,
       opacity: 1,
       yPercent: 0,
+      y: 0,
       stagger: {
         each: 0.125,
       }
