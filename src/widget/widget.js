@@ -411,6 +411,7 @@ function createAnimation() {
   CustomEase.create("easeInOut", "M0,0C0.16564702500000003,0,0.228405825,0.17109424,0.301725,0.371944,0.405767975,0.656453368,0.5314574750000001,1,1,1"); 
 
   gsap.defaults({
+    ease: "power4"
     // ease: "easeOut",
     // duration: 0.25
   });
@@ -466,11 +467,13 @@ function createAnimation() {
 
       tl.to(popupIcons, {
         duration: resizeDuration,
-        x: panel.iconX
+        x: panel.iconX,
+        ease: "power4"
       }, "resize")
       .to(popupBackground, {
         duration: resizeDuration,
-        scaleX: panel.bgScale
+        scaleX: panel.bgScale,
+        ease: "power4"
       }, "resize");
     }
 
