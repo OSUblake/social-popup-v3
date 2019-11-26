@@ -1,6 +1,8 @@
 export default {
   flipX: $_flipX_$,
   flipY: $_flipY_$,
+  overflowSpeed: 100,
+  minOverflowDuration: 0.25,
   textBoxPadX: 30,
   textBoxPadY: 6,
   textBoxWidth: Number($_maxTextBoxWidth_$),
@@ -50,6 +52,7 @@ export default {
   megaPanels: [
     {
       id: "megaPanel1",
+      megaPanel: true,
       heading: "$_megaPanel1_heading_$",
       subheading: "$_megaPanel1_subheading_$",
       icon: "$_megaPanel1_icon_$",
@@ -57,6 +60,7 @@ export default {
     },
     {
       id: "megaPanel2",
+      megaPanel: true,
       heading: "$_megaPanel2_heading_$",
       subheading: "$_megaPanel2_subheading_$",
       icon: "$_megaPanel2_icon_$",

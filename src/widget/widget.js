@@ -5,7 +5,7 @@ import loadImages from "./js/load-images.js";
 import loadScripts from "./js/load-scripts.js";
 import settings from "./js/settings.js";
 
-// import "./js/scrub-timeline.js";
+import "./js/scrub-timeline.js";
 
 const scriptPaths = [$_scripts_$];
 
@@ -20,7 +20,7 @@ let megaPanels = settings.megaPanels
 let allPanels = [...panels, ...megaPanels];
 
 const popupHolder = select(".popup-holder");
-let popupContent, popupBackground;
+let popupContent, popupBackground, popupIcons;
 
 Promise.all([
   loadFont(settings.headingFont, settings.subheadingFont),
@@ -44,18 +44,31 @@ function buildWidget() {
 
   allPanels.forEach(panel => {
 
+    // textBoxes.push(html`
+    //   <div class="${panel.id} popup-text-box">
+    //     <div class="popup-text-box__mask">
+    //       <div class="popup-text-box__text">
+    //         <div class="popup-text-box__heading">
+    //           $${panel.heading}
+    //         </div>
+    //         <div></div>
+    //         ${panel.subheading ? html`<div class="popup-text-box__subheading">$${panel.subheading}</div>` : ""}
+    //       </div>
+    //     </div>          
+    //   </div>
+    // `);
+
     textBoxes.push(html`
-      <div class="${panel.id} popup-text-box">
-        <div class="popup-text-box__mask">
-          <div class="popup-text-box__text">
-            <div class="popup-text-box__heading">
-              $${panel.heading}
-            </div>
-            <div></div>
-            ${panel.subheading ? html`<div class="popup-text-box__subheading">$${panel.subheading}</div>` : ""}
+    <div class="${panel.id} popup-text-box">
+      <div class="popup-text-box__mask">
+        <div class="popup-text-box__text">
+          <div class="popup-text-box__heading">
+            $${panel.heading}
           </div>
-        </div>          
-      </div>
+          ${panel.subheading ? html`<div class="popup-text-box__subheading">$${panel.subheading}</div>` : ""}
+        </div>
+      </div>          
+    </div>
     `);
 
     if (panel.icon) {
@@ -89,15 +102,14 @@ function buildWidget() {
   `;
 
   positionElements();
-  buildAnimation();
+  createAnimation();
 }
 
 function positionElements() {
 
-  popupContent = select(".popup-content");
   popupBackground = select(".popup-background");
-
-  let maxWidth = -Infinity;
+  popupContent = select(".popup-content");
+  popupIcons = select(".popup-icons");
 
   const adjustWidth = settings.widthAdjust.toLowerCase() === "auto";
   const startWidth = settings.textBoxWidth;
@@ -114,10 +126,13 @@ function positionElements() {
   const imageAlign = settings.imageAlign;
   let maxImageHeight = -Infinity;
 
-  const split = new SplitText(".popup-text-box__heading, .popup-text-box__subheading", {
+  const headingSplit = new SplitText(".popup-text-box__heading", {
     type: "chars"
   });
 
+  const subheadingSplit = new SplitText(".popup-text-box__subheading", {
+    type: "chars"
+  });
   
   // force repaint?
   // popupContent.style.display = "none";
@@ -139,14 +154,30 @@ function positionElements() {
     const subheading = select(".popup-text-box__subheading", textBox);
     const subheadingChars = selectAll(".popup-text-box__subheading > *", textBox);
 
+    // (!) Absolute test
+    const headingHeight = heading.getBoundingClientRect().height;
+    const subheadingHeight = subheading ? subheading.getBoundingClientRect().height : 0;
+
+    if (subheading) {
+      gsap.set(subheading, {
+        top: headingHeight
+      });
+    }
+
+    gsap.set(textBoxText, {
+      height: headingHeight + subheadingHeight
+    });
+
     const textBounds = textBoxText.getBoundingClientRect();
 
     if (textBounds.height > maxTextBoxHeight) {
 
-      const scale = maxTextBoxHeight / textBounds.height;
-  
-      gsap.set(textBoxText, { scale });
-    }   
+      panel.textScale = maxTextBoxHeight / textBounds.height;  
+      gsap.set(textBoxText, { scale: panel.textScale });
+
+    } else {
+      panel.textScale = 1;      
+    }
 
     const headingWidth = heading.getBoundingClientRect().width;
     const subheadingWidth = subheading ? subheading.getBoundingClientRect().width : headingWidth;
@@ -194,13 +225,14 @@ function positionElements() {
     let deltaX = startWidth - textBoxWidth;
     let maskX = adjustWidth && flipX ? padX + deltaX : padX;
 
-    if (textBoxWidth > maxWidth) {
-      maxWidth = textBoxWidth;
-    }    
+    // if (textBoxWidth > maxWidth) {
+    //   maxWidth = textBoxWidth;
+    // }    
 
     panel.iconX = -deltaX;
     panel.bgScale = textBoxWidth / startWidth;
     panel.textBoxWidth = textBoxWidth;
+    panel.hasOverflow = hasOverflow;
     panel.headingOverlow = Math.max(0, headingWidth - maskWidth);
     panel.subheadingOverlow = Math.max(0, subheadingWidth - maskWidth);
 
@@ -238,10 +270,6 @@ function positionElements() {
           break;
       }
 
-      // console.log("imageAlign", imageAlign)
-      // console.log("imageX", imageX);
-      // console.log("imagePercent", imagePercent);
-
       gsap.set(image, {
         x: imageX,
         xPercent: imagePercent
@@ -251,12 +279,16 @@ function positionElements() {
 
   const firstPanel = allPanels[0];
 
-  gsap.set(firstPanel.targets.icon, {
+  gsap.set(popupIcons, {
     x: firstPanel.iconX
   });
 
   gsap.set(popupBackground, {
     scaleX: firstPanel.bgScale
+  });
+
+  gsap.set(".popup-icon", {
+    xPercent: -100
   });
 
   gsap.set(".popup-images", {
@@ -266,20 +298,38 @@ function positionElements() {
 
   gsap.set(".popup-image", {
     y: maxImageHeight * 2,
-
-    yPercent: -100
-  })
+    // yPercent: -100
+  });
 
   gsap.set(".popup-text-box__text", {
     yPercent: -50
+  });
+
+  gsap.set(".popup-text-box__heading", {
+    y: "+=15",
+    // y: -100,
+  });
+
+  gsap.set(headingSplit.chars, {
+    opacity: 0,
+    yPercent: 25
+  });
+
+  gsap.set(subheadingSplit.chars, {
+    opacity: 0
   });
 
   gsap.set(popupHolder, {
     height: settings.textBoxHeight + maxImageHeight * 2
   });
 
-  gsap.set(".popup-content", {
-    top: maxImageHeight * 2
+  gsap.set(".popup-icon, .popup-image, .popup-text-box__heading, .popup-text-box__subheading", {
+    autoAlpha: 0
+  });
+
+  gsap.set(popupContent, {
+    top: maxImageHeight * 2,
+    xPercent: -100
   });
 
   if (flipX) {
@@ -305,10 +355,202 @@ function positionElements() {
   }
 }
 
-function buildAnimation() {
+function createAnimation() {
+
+  const adjustWidth = settings.widthAdjust.toLowerCase() === "auto";
+  const textBoxHeight = settings.textBoxHeight;
+  const overflowSpeed = settings.overflowSpeed;
+  const minOverflowDuration = settings.minOverflowDuration;
+
+
+  const firstPanel = allPanels[0];
+  const lastPanel = allPanels[allPanels.length - 1];
+  const wait = `+=${settings.showDuration}`;
+
+  let prevHeight = 0;
+  let prevPanel = null;
+  let prevIcon = null;
+  let prevImage = null;
+  let prevHeading = null;
+  let prevSubheading = null;
+  let prevTextBoxMask = null;
   
-  gsap.to(popupHolder, {
-    duration: 0.1,
-    autoAlpha: 1
+  const master = gsap.timeline({
+    // repeat: -1,
+    // repeatDelay: settings.replayWait
   });
+
+  const peakTime = 0.301725; // x-axis
+  const peakProgress = 0.371944; // y-axis
+
+  CustomEase.create("easeIn", "0.549, 0, 0.757, 0.460");
+  CustomEase.create("easeOut", "0.149, 0.453, 0.329, 1");
+  CustomEase.create("easeInOut", "M0,0C0.16564702500000003,0,0.228405825,0.17109424,0.301725,0.371944,0.405767975,0.656453368,0.5314574750000001,1,1,1");
+
+  gsap.defaults({
+    ease: "easeOut",
+    duration: 0.25
+  });  
+
+  master.set(popupHolder, { autoAlpha: 1 })
+    .to(popupContent, {
+      duration: 0.5,
+      xPercent: 0
+    });
+
+
+  allPanels.forEach(panel => {
+
+    const { 
+      icon, image, imageElement, textBox, textBoxText, textBoxMask, heading, headingChars, subheading, subheadingChars 
+    } = panel.targets;
+
+    const tl = gsap.timeline();
+    const headingTl = gsap.timeline();
+    const subheadingTl = gsap.timeline();
+
+    // let headingDuration = 0;
+    // let subheadingDuration = 0;
+
+    tl.add("start")
+
+    if (prevHeading) {
+      
+      tl.to(prevHeading, {
+        duration: 0.25,
+        // y: -textBoxHeight,
+        y: `-=${textBoxHeight * 1.5 / panel.textScale}`,
+        ease: "easeIn"
+      }, "start")
+      .set(prevHeading, {
+        autoAlpha: 0
+      }, ">");
+
+    }
+
+    if (prevSubheading) {
+
+      // TODO: Add heading height?
+      tl.to(prevSubheading, {
+        duration: 0.25,
+        // y: -textBoxHeight,
+        y: `-=${textBoxHeight * 1.5 / panel.textScale}`,
+        ease: "easeIn"
+      }, "start+=0.125")
+      .set(prevSubheading, {
+        autoAlpha: 0
+      }, ">");
+
+    }
+
+    tl.add("resize", prevHeading ? "-=0.2" : 0);
+
+    if (adjustWidth && panel !== firstPanel) {
+
+      tl.to(popupIcons, {
+        duration: 1,
+        x: panel.iconX,
+        ease: "easeInOut"
+      }, "resize")
+      .to(popupBackground, {
+        duration: 1,
+        scaleX: panel.bgScale,
+        ease: "easeInOut"
+      }, "resize");
+
+    }
+
+    tl.add("text");
+
+    headingTl.set(heading, {
+      autoAlpha: 1
+    })
+    .to(heading, {
+      duration: 0.25,
+      y: 0
+    }, 0)
+    .to(headingChars, {
+      duration: 0.25,
+      opacity: 1,
+      yPercent: 0,
+      stagger: {
+        each: 0.125,
+        // amount: 0.5
+      }
+    }, 0);
+    
+
+    if (subheading) {
+
+      subheadingTl.set(subheading, {
+        autoAlpha: 1
+      })
+      .to(subheadingChars, {
+        duration: 0.25,
+        opacity: 1,
+        stagger: {
+          each: 0.125,
+          // amount: 0.5
+        }
+      });
+
+    }
+
+    // const headingDuration = headingTl.duration();
+    // const subheadingDuration = subheadingTl.duration();
+
+    headingTl.duration(0.5);
+    subheadingTl.duration(0.5);
+
+    tl.add(headingTl, "resize+=0.5");
+    tl.add(subheadingTl, "resize+=0.75");
+
+    if (panel.headingOverlow) {
+
+      tl.to(heading, {
+        // duration: 1,
+        // duration: panel.headingOverlow / overflowSpeed,
+        duration: Math.max(minOverflowDuration, panel.headingOverlow / overflowSpeed),
+        x: -panel.headingOverlow / panel.textScale,
+        ease: "easeInOut"
+      }, "resize+=1");
+    }
+
+    if (subheading && panel.subheadingOverlow) {
+
+      tl.to(subheading, {
+        // duration: 1,
+        // duration: panel.subheadingOverlow / overflowSpeed,
+        duration: Math.max(minOverflowDuration, panel.subheadingOverlow / overflowSpeed),
+        x: -panel.subheadingOverlow / panel.textScale,
+        ease: "easeInOut"
+      }, "resize+=1.25");
+    }
+    
+    if (icon) {
+
+      tl.set(icon, {
+        autoAlpha: 1
+      })
+      .to(icon, {
+        duration: 0.5,
+        xPercent: 0
+      })
+    }
+
+    tl.set({}, {}, wait);
+
+    master.add(tl, panel !== firstPanel ? ">" : "-=0.5");
+
+    // prevTextBoxMask = textBoxMask;
+    prevIcon = icon;
+    prevImage = image;
+    prevHeading = heading;
+    prevSubheading = subheading;
+    // prevPanel = panel;
+  });
+
+  if ($_devMode_$) {
+    ScrubGSAPTimeline(master);
+  }
 }

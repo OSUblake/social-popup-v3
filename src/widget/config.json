@@ -1,6 +1,6 @@
 {  
   "development": {
-
+    "devMode": true,
     "eventTarget": "document",
     "loadEvent": "onLoad",
     "scripts": [
@@ -11,7 +11,7 @@
 
     "customFields": {
       "panel1_heading": {
-        "value": "@NERDSPWN"
+        "value": "@NERDSPWN PANEL 1"
       },
       "panel1_subheading": {
         "value": "make sure to follow me on twitter!"
@@ -21,7 +21,7 @@
       },
 
       "panel2_heading": {
-        "value": "@NERDORDIELONGERNAME"
+        "value": "@NERDORDIELONGERNAME  PANEL 2"
       },
       "panel2_subheading": {
         "value": ""
@@ -31,7 +31,7 @@
       },
 
       "panel3_heading": {
-        "value": "SUBSCRIBE FOR FREE"
+        "value": "SUBSCRIBE FOR FREE PANEL 3"
       },
       "panel3_subheading": {
         "value": "using twitch"
@@ -41,7 +41,7 @@
       },
 
       "panel4_heading": {
-        "value": "@NERDSPWN"
+        "value": "@NERDSPWN PANEL 4"
       },
       "panel4_subheading": {
         "value": "make sure to follow me on twitter!"
@@ -51,7 +51,7 @@
       },
 
       "panel5_heading": {
-        "value": "@NERDSPWN"
+        "value": "@NERDSPWN PANEL 5"
       },
       "panel5_subheading": {
         "value": "make sure to follow me on twitter!"
@@ -61,7 +61,7 @@
       },
 
       "megaPanel1_heading": {
-        "value": "@NERDSPWN"
+        "value": "@NERDSPWN MEGA PANEL 1"
       },
       "megaPanel1_subheading": {
         "value": "make sure to follow me on twitter!"
@@ -74,7 +74,7 @@
       },
 
       "megaPanel2_heading": {
-        "value": "@NERDSPWN"
+        "value": "@NERDSPWN MEGA PANEL 2"
       },
       "megaPanel2_subheading": {
         "value": "make sure to follow me on twitter!"
@@ -89,6 +89,7 @@
   },
   
   "streamElements": {
+    "devMode": false,
     "eventTarget": "window",
     "loadEvent": "onWidgetLoad",
     "scripts": [
@@ -131,6 +132,7 @@
   },
 
   "streamlabs": {
+    "devMode": false,
     "eventTarget": "document",
     "loadEvent": "onLoad",
     "scripts": [

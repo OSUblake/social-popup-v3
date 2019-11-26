@@ -112,9 +112,12 @@
   font-size: var(--headingFontSize);
   color: var(--headingColor);
 
-  outline: 1px solid pink;
+  /* outline: 1px solid pink; */
 
-  display: inline;
+  /* display: inline; */
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .popup-text-box__subheading {
@@ -123,15 +126,23 @@
   font-size: var(--subheadingFontSize);
   color: var(--subheadingColor);
 
-  outline: 1px solid purple;
+  /* outline: 1px solid purple; */
 
-  display: inline;
+  /* display: inline; */
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .popup-icons {
   position: absolute;
   top: 0;
-  right: 0;
+  /* right: 0; */
+
+  right: calc(var(--textBoxHeight) * -1);
+  overflow: hidden;
+  width: var(--textBoxHeight);
+  height: var(--textBoxHeight);
 }
 
 .popup-icon {
