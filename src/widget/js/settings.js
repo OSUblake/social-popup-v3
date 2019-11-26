@@ -2,7 +2,7 @@ export default {
   flipX: $_flipX_$,
   flipY: $_flipY_$,
   overflowSpeed: 100,
-  minOverflowDuration: 0.25,
+  minOverflowDuration: 0.5,
   textBoxPadX: 30,
   textBoxPadY: 6,
   textBoxWidth: Number($_maxTextBoxWidth_$),

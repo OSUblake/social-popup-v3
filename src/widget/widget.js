@@ -44,6 +44,9 @@ function buildWidget() {
 
   allPanels.forEach(panel => {
 
+    // Use double $ signs to sanitize strings
+    // $${'<div>Dangerous content</div>'}
+
     textBoxes.push(html`
     <div class="${panel.id} popup-text-box">
       <div class="popup-text-box__mask">
@@ -91,6 +94,19 @@ function buildWidget() {
   createAnimation();
 }
 
+function redraw(...targets) {
+  
+  targets.forEach(target => {
+
+    if (target) {
+      target.style.display = "none";
+      target.offsetHeight;
+      target.style.display = "block";
+      target.offsetHeight;
+    }    
+  });
+}
+
 function positionElements() {
 
   popupBackground = select(".popup-background");
@@ -119,12 +135,7 @@ function positionElements() {
   const subheadingSplit = new SplitText(".popup-text-box__subheading", {
     type: "chars"
   });
-  
-  // force repaint?
-  // popupContent.style.display = "none";
-  // popupContent.offsetHeight;
-  // popupContent.style.display = "block";
-  
+    
   allPanels.forEach(panel => {
 
     const icon = select(`.${panel.id}.popup-icon`);
@@ -153,20 +164,26 @@ function positionElements() {
       height: headingHeight + subheadingHeight
     });
 
-    const textBounds = textBoxText.getBoundingClientRect();
+    // force paint?
+    // redraw(textBoxText, heading, subheading, textBoxText);
 
-    if (textBounds.height > maxTextBoxHeight) {
+    const textHeight = textBoxText.getBoundingClientRect().height;
 
-      panel.textScale = maxTextBoxHeight / textBounds.height;  
+    if (textHeight > maxTextBoxHeight) {
+
+      panel.textScale = maxTextBoxHeight / textHeight;  
       gsap.set(textBoxText, { scale: panel.textScale });
 
     } else {
       panel.textScale = 1;      
     }
 
-    const headingWidth = heading.getBoundingClientRect().width;
+    const headingBounds = heading.getBoundingClientRect();
+    const headingWidth = headingBounds.width;
     const subheadingWidth = subheading ? subheading.getBoundingClientRect().width : headingWidth;
     const textWidth = Math.max(headingWidth, subheadingWidth);
+
+    panel.headingHeight = headingBounds.height;
 
     let textBoxWidth = startWidth;
     let tempMaskWidth = textWidth + padX * 2;
@@ -248,6 +265,10 @@ function positionElements() {
         xPercent: imagePercent
       });
     }
+
+    // gsap.set(heading, {
+    //   y: `+=${15 / panel.textScale}`
+    // });
   });
 
   const firstPanel = allPanels[0];
@@ -278,10 +299,9 @@ function positionElements() {
     yPercent: -50
   });
 
-  gsap.set(".popup-text-box__heading", {
-    y: "+=15",
-    // y: -100,
-  });
+  // gsap.set(".popup-text-box__heading", {
+  //   y: "+=15"
+  // });
 
   gsap.set(headingSplit.chars, {
     opacity: 0,
@@ -388,25 +408,22 @@ function createAnimation() {
       
       tl.to(prevHeading, {
         duration: 0.25,
-        // y: -textBoxHeight,
         y: `-=${textBoxHeight * 1.5 / panel.textScale}`,
-        ease: "easeIn"
+        ease: "easeInOut"
       }, "start")
       .set(prevHeading, {
         autoAlpha: 0
       }, ">");
-
     }
 
     if (prevSubheading) {
 
-      // TODO: Add heading height?
       tl.to(prevSubheading, {
         duration: 0.25,
-        // y: -textBoxHeight,
-        y: `-=${textBoxHeight * 1.5 / panel.textScale}`,
-        ease: "easeIn"
-      }, "start+=0.125")
+        // duration: 0.125,
+        y: `-=${panel.headingHeight + textBoxHeight * 1.5 / panel.textScale}`,
+        ease: "easeInOut"
+      }, "start+=0.0625")
       .set(prevSubheading, {
         autoAlpha: 0
       }, ">");
@@ -445,7 +462,6 @@ function createAnimation() {
       yPercent: 0,
       stagger: {
         each: 0.125,
-        // amount: 0.5
       }
     }, 0);
     
@@ -460,10 +476,8 @@ function createAnimation() {
         opacity: 1,
         stagger: {
           each: 0.125,
-          // amount: 0.5
         }
       });
-
     }
 
     headingTl.duration(0.5);
@@ -475,20 +489,18 @@ function createAnimation() {
     if (panel.headingOverlow) {
 
       tl.to(heading, {
-        // duration: panel.headingOverlow / overflowSpeed,
         duration: Math.max(minOverflowDuration, panel.headingOverlow / overflowSpeed),
         x: -panel.headingOverlow / panel.textScale,
-        ease: "easeInOut"
+        // ease: "easeInOut"
       }, "resize+=1");
     }
 
     if (subheading && panel.subheadingOverlow) {
 
       tl.to(subheading, {
-        // duration: panel.subheadingOverlow / overflowSpeed,
         duration: Math.max(minOverflowDuration, panel.subheadingOverlow / overflowSpeed),
         x: -panel.subheadingOverlow / panel.textScale,
-        ease: "easeInOut"
+        // ease: "easeInOut"
       }, "resize+=1.25");
     }
     

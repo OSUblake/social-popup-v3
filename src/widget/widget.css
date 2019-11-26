@@ -52,19 +52,14 @@
   visibility: hidden;
   opacity: 0;
   overflow: hidden;
-
-
   width: calc(var(--maxTextBoxWidth) + var(--textBoxHeight));
-  /* height: calc(var(--textBoxHeight) + var(--maxImageHeight));   */
   height: var(--textBoxHeight);
-  background-color: #ccc;
+  background-color: #ddd;
 }
 
 .popup-content {
   width: var(--maxTextBoxWidth);
   height: var(--textBoxHeight);
-
-  /* top: var(--maxImageHeight); */
 }
 
 .popup-background {
@@ -96,8 +91,8 @@
   white-space: nowrap;
   height: 100%;
 
-  border: 1px solid red;
-  width: 200px;
+  /* border: 1px solid red; */
+  /* width: 200px; */
 }
 
 .popup-text-box__text {
@@ -111,10 +106,6 @@
   font-weight: var(--headingFontWeight);
   font-size: var(--headingFontSize);
   color: var(--headingColor);
-
-  /* outline: 1px solid pink; */
-
-  /* display: inline; */
   position: absolute;
   top: 0;
   left: 0;
@@ -125,10 +116,6 @@
   font-weight: var(--subheadingFontWeight);
   font-size: var(--subheadingFontSize);
   color: var(--subheadingColor);
-
-  /* outline: 1px solid purple; */
-
-  /* display: inline; */
   position: absolute;
   top: 0;
   left: 0;
@@ -137,8 +124,6 @@
 .popup-icons {
   position: absolute;
   top: 0;
-  /* right: 0; */
-
   right: calc(var(--textBoxHeight) * -1);
   overflow: hidden;
   width: var(--textBoxHeight);
