@@ -44,20 +44,6 @@ function buildWidget() {
 
   allPanels.forEach(panel => {
 
-    // textBoxes.push(html`
-    //   <div class="${panel.id} popup-text-box">
-    //     <div class="popup-text-box__mask">
-    //       <div class="popup-text-box__text">
-    //         <div class="popup-text-box__heading">
-    //           $${panel.heading}
-    //         </div>
-    //         <div></div>
-    //         ${panel.subheading ? html`<div class="popup-text-box__subheading">$${panel.subheading}</div>` : ""}
-    //       </div>
-    //     </div>          
-    //   </div>
-    // `);
-
     textBoxes.push(html`
     <div class="${panel.id} popup-text-box">
       <div class="popup-text-box__mask">
@@ -154,7 +140,6 @@ function positionElements() {
     const subheading = select(".popup-text-box__subheading", textBox);
     const subheadingChars = selectAll(".popup-text-box__subheading > *", textBox);
 
-    // (!) Absolute test
     const headingHeight = heading.getBoundingClientRect().height;
     const subheadingHeight = subheading ? subheading.getBoundingClientRect().height : 0;
 
@@ -212,9 +197,6 @@ function positionElements() {
       imageElement.style.height = panel.imageHeight + "px";
     }
 
-    // let tempMaskWidth = textWidth + padX * 2;
-    // let textBoxWidth = startWidth;
-
     let hasOverflow = tempMaskWidth > textBoxWidth;
 
     if (adjustWidth && !hasOverflow) {
@@ -225,21 +207,12 @@ function positionElements() {
     let deltaX = startWidth - textBoxWidth;
     let maskX = adjustWidth && flipX ? padX + deltaX : padX;
 
-    // if (textBoxWidth > maxWidth) {
-    //   maxWidth = textBoxWidth;
-    // }    
-
     panel.iconX = -deltaX;
     panel.bgScale = textBoxWidth / startWidth;
     panel.textBoxWidth = textBoxWidth;
     panel.hasOverflow = hasOverflow;
     panel.headingOverlow = Math.max(0, headingWidth - maskWidth);
     panel.subheadingOverlow = Math.max(0, subheadingWidth - maskWidth);
-
-    // console.log("\n");
-    // console.log("TEXT HEIGHT", textBounds.height)
-    // console.log("HEADING OVERFLOW", panel.headingOverlow)
-    // console.log("SUBHEADING OVERFLOW", panel.subheadingOverlow)
 
     panel.targets = {
       icon, image, imageElement, textBox, textBoxText, textBoxMask, heading, headingChars, subheading, subheadingChars
@@ -409,9 +382,6 @@ function createAnimation() {
     const headingTl = gsap.timeline();
     const subheadingTl = gsap.timeline();
 
-    // let headingDuration = 0;
-    // let subheadingDuration = 0;
-
     tl.add("start")
 
     if (prevHeading) {
@@ -496,9 +466,6 @@ function createAnimation() {
 
     }
 
-    // const headingDuration = headingTl.duration();
-    // const subheadingDuration = subheadingTl.duration();
-
     headingTl.duration(0.5);
     subheadingTl.duration(0.5);
 
@@ -508,7 +475,6 @@ function createAnimation() {
     if (panel.headingOverlow) {
 
       tl.to(heading, {
-        // duration: 1,
         // duration: panel.headingOverlow / overflowSpeed,
         duration: Math.max(minOverflowDuration, panel.headingOverlow / overflowSpeed),
         x: -panel.headingOverlow / panel.textScale,
@@ -519,7 +485,6 @@ function createAnimation() {
     if (subheading && panel.subheadingOverlow) {
 
       tl.to(subheading, {
-        // duration: 1,
         // duration: panel.subheadingOverlow / overflowSpeed,
         duration: Math.max(minOverflowDuration, panel.subheadingOverlow / overflowSpeed),
         x: -panel.subheadingOverlow / panel.textScale,
