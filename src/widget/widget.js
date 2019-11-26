@@ -491,7 +491,10 @@ function createAnimation() {
       tl.to(heading, {
         duration: Math.max(minOverflowDuration, panel.headingOverlow / overflowSpeed),
         x: -panel.headingOverlow / panel.textScale,
-        // ease: "easeInOut"
+        // ease: "easeInOut",
+        // ease: "sine.inOut",
+        // ease: "power2.inOut",
+        ease: "none",
       }, "resize+=1");
     }
 
@@ -500,7 +503,10 @@ function createAnimation() {
       tl.to(subheading, {
         duration: Math.max(minOverflowDuration, panel.subheadingOverlow / overflowSpeed),
         x: -panel.subheadingOverlow / panel.textScale,
-        // ease: "easeInOut"
+        // ease: "easeInOut",
+        // ease: "sine.inOut",
+        // ease: "power2.inOut",
+        ease: "none",
       }, "resize+=1.25");
     }
     
