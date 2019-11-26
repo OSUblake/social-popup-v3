@@ -1,10 +1,12 @@
 import { select, selectAll } from "./js/utils.js";
 import html from "./js/html.js";
-import loadFont from "./js/load-fonts.js";
+import loadFonts from "./js/load-fonts.js";
 import loadImages from "./js/load-images.js";
 import loadScripts from "./js/load-scripts.js";
 import settings from "./js/settings.js";
+import "../vendor/fontfaceobserver.js";
 
+// (!) Comment out for build
 import "./js/scrub-timeline.js";
 
 const scriptPaths = [$_scripts_$];
@@ -23,7 +25,7 @@ const popupHolder = select(".popup-holder");
 let popupContent, popupBackground, popupIcons;
 
 Promise.all([
-  loadFont(settings.headingFont, settings.subheadingFont),
+  ...loadFonts(settings.headingFont, settings.subheadingFont),
   ...loadImages(allPanels),
   ...loadScripts(scriptPaths)
 ])
@@ -81,30 +83,45 @@ function buildWidget() {
     }
   });
 
+  // add dummy elements to prevent warnings in console
   popupHolder.innerHTML = html`
     <div class="popup-content">      
-      <div class="popup-icons">${icons}</div>
-      <div class="popup-images">${images}</div>
+      <div class="popup-icons">
+
+        <div class="dummy popup-icon">
+          <div class="popup-icon__background"></div>
+          <img class="popup-icon__image" src="">
+        </div>
+        ${icons}
+      </div>
+
+      <div class="popup-images">
+
+        <div class="dummy popup-image">
+          <div class="popup-image__background"></div>
+          <img class="popup-image__image" src="">
+        </div>
+        ${images}
+      </div>
+
       <div class="popup-background"></div>      
-      <div class="popup-text-boxes">${textBoxes}</div>
+
+      <div class="popup-text-boxes">        
+        <div class="dummy popup-text-box">
+          <div class="popup-text-box__mask">
+            <div class="popup-text-box__text">
+              <div class="popup-text-box__heading">i</div>
+              <div class="popup-text-box__subheading">i</div>
+            </div>
+          </div>          
+        </div>
+        ${textBoxes}
+      </div>
     </div>
   `;
 
   positionElements();
   createAnimation();
-}
-
-function redraw(...targets) {
-  
-  targets.forEach(target => {
-
-    if (target) {
-      target.style.display = "none";
-      target.offsetHeight;
-      target.style.display = "block";
-      target.offsetHeight;
-    }    
-  });
 }
 
 function positionElements() {
@@ -167,9 +184,6 @@ function positionElements() {
     gsap.set(textBoxText, {
       height: headingHeight + subheadingHeight
     });
-
-    // force paint?
-    // redraw(textBoxText, heading, subheading, textBoxText);
 
     const textHeight = textBoxText.getBoundingClientRect().height;
 
@@ -311,9 +325,10 @@ function positionElements() {
   //   y: "+=15"
   // });
 
+
+
   gsap.set(headingSplit.chars, {
-    opacity: 0,
-    // yPercent: 25
+    opacity: 0
   });
 
   gsap.set(subheadingSplit.chars, {
@@ -354,6 +369,8 @@ function positionElements() {
       rotationX: 180
     });
   }
+
+  selectAll(".dummy").forEach(element => element.remove());
 }
 
 function createAnimation() {
@@ -389,19 +406,19 @@ function createAnimation() {
 
   CustomEase.create("easeIn", "0.549, 0, 0.757, 0.460");
   CustomEase.create("easeOut", "0.149, 0.453, 0.329, 1");
-  CustomEase.create("easeInOut", "M0,0C0.16564702500000003,0,0.228405825,0.17109424,0.301725,0.371944,0.405767975,0.656453368,0.5314574750000001,1,1,1");
+  CustomEase.create("easeInOut", "M0,0C0.16564702500000003,0,0.228405825,0.17109424,0.301725,0.371944,0.405767975,0.656453368,0.5314574750000001,1,1,1"); 
 
   gsap.defaults({
     // ease: "easeOut",
-    duration: 0.25
-  });  
+    // duration: 0.25
+  });
 
-  master.set(popupHolder, { autoAlpha: 1 })
+  master
+    .set(popupHolder, { autoAlpha: 1 })
     .to(popupContent, {
       duration: 0.5,
       xPercent: 0
     });
-
 
   allPanels.forEach(panel => {
 
@@ -420,7 +437,6 @@ function createAnimation() {
       tl.to(prevHeading, {
         duration: 0.3,
         y: `-=${textBoxHeight * 1 / panel.textScale}`,
-        // ease: "easeInOut",
         ease: "power1"
       }, "start")
       .set(prevHeading, {
@@ -431,70 +447,53 @@ function createAnimation() {
     if (prevSubheading) {
 
       tl.to(prevSubheading, {
-        duration: 0.3,
-        // duration: 0.125,
+        duration: 0.25,
         y: `-=${panel.headingHeight + textBoxHeight * 1 / panel.textScale}`,
-        // ease: "easeInOut",
         ease: "power1"
-      }, "start+=0.15")
+      }, "start+=0.06")
       .set(prevSubheading, {
         autoAlpha: 0
       }, ">");
-
     }
 
     tl.add("resize", prevHeading ? "-=0.2" : 0);
 
     if (adjustWidth && panel !== firstPanel) {
 
-      // const duration = panel.iconX
-
       tl.to(popupIcons, {
         duration: 1,
-        x: panel.iconX,
-        ease: "easeInOut"
+        x: panel.iconX
       }, "resize")
       .to(popupBackground, {
         duration: 1,
-        scaleX: panel.bgScale,
-        ease: "easeInOut"
+        scaleX: panel.bgScale
       }, "resize");
-
     }
 
     tl.add("text");
 
     headingTl.set(heading, {
-      autoAlpha: 1
-    })
-    // .to(heading, {
-    //   duration: 0.25,
-    //   y: 0
-    // }, 0)
-    .to(headingChars, {
-      duration: 0.08,
-      opacity: 1,
-      // yPercent: 0,
-      y: 0,
-      ease: "power1",
-      stagger: {
-        each: 0.03,
-      }
-    }, 0);
+        autoAlpha: 1
+      })
+      .to(headingChars, {
+        duration: 0.08,
+        opacity: 1,
+        y: 0,
+        ease: "power1",
+        stagger: 0.03
+      }, 0);
     
     if (subheading) {
 
       subheadingTl.set(subheading, {
-        autoAlpha: 1
-      })
-      .to(subheadingChars, {
-        duration: 0.08,
-        opacity: 1,
-        ease: "power1",
-        stagger: {
-          each: 0.03,
-        }
-      });
+          autoAlpha: 1
+        })
+        .to(subheadingChars, {
+          duration: 0.08,
+          opacity: 1,
+          ease: "power1",
+          stagger: 0.03
+        });
     }
 
     const headingDuration = headingTl.duration();
@@ -513,7 +512,6 @@ function createAnimation() {
         x: -panel.headingOverlow / panel.textScale,
         ease: "none",
       }, `resize+=${0.5 + headingDuration * 0.8}`);
-      // }, "resize+=1");
     }
 
     if (subheading && panel.subheadingOverlow) {
@@ -523,7 +521,6 @@ function createAnimation() {
         x: -panel.subheadingOverlow / panel.textScale,
         ease: "none",
       }, `resize+=${0.75 + subheadingDuration * 0.8}`);
-      // }, "resize+=1.25");
     }
     
     if (icon) {
