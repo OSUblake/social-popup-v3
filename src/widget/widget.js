@@ -339,7 +339,7 @@ function positionElements() {
       rotationY: 180
     });
 
-    gsap.set(".popup-icon__image, .popup-image__image, .popup-image__background, .popup-text-boxes", {
+    gsap.set(".popup-icon__image, .popup-icon__background, .popup-image__image, .popup-image__background, .popup-text-boxes", {
       rotationY: 180
     });
   }
@@ -350,19 +350,22 @@ function positionElements() {
       rotationX: 180
     });
 
-    gsap.set(".popup-icon__image, .popup-image__image, .popup-image__background, .popup-text-boxes", {
+    gsap.set(".popup-icon__image, .popup-icon__background, .popup-image__image, .popup-image__background, .popup-text-boxes", {
       rotationX: 180
     });
   }
 }
 
 function createAnimation() {
+  
+  const {
+    minOverflowDuration,
+    overflowSpeed,
+    resizeSpeed,
+    textBoxHeight
+  } = settings;
 
   const adjustWidth = settings.widthAdjust.toLowerCase() === "auto";
-  const textBoxHeight = settings.textBoxHeight;
-  const overflowSpeed = settings.overflowSpeed;
-  const minOverflowDuration = settings.minOverflowDuration;
-
 
   const firstPanel = allPanels[0];
   const lastPanel = allPanels[allPanels.length - 1];
@@ -442,6 +445,8 @@ function createAnimation() {
 
     if (adjustWidth && panel !== firstPanel) {
 
+      // const duration = panel.iconX
+
       tl.to(popupIcons, {
         duration: 1,
         x: panel.iconX,
@@ -500,9 +505,6 @@ function createAnimation() {
       tl.to(heading, {
         duration: Math.max(minOverflowDuration, panel.headingOverlow / overflowSpeed),
         x: -panel.headingOverlow / panel.textScale,
-        // ease: "easeInOut",
-        // ease: "sine.inOut",
-        // ease: "power2.inOut",
         ease: "none",
       }, "resize+=1");
     }
@@ -512,9 +514,6 @@ function createAnimation() {
       tl.to(subheading, {
         duration: Math.max(minOverflowDuration, panel.subheadingOverlow / overflowSpeed),
         x: -panel.subheadingOverlow / panel.textScale,
-        // ease: "easeInOut",
-        // ease: "sine.inOut",
-        // ease: "power2.inOut",
         ease: "none",
       }, "resize+=1.25");
     }

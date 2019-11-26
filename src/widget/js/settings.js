@@ -1,6 +1,7 @@
 export default {
   flipX: $_flipX_$,
   flipY: $_flipY_$,
+  resizeSpeed: 100,
   overflowSpeed: 100,
   minOverflowDuration: 0.5,
   textBoxPadX: 30,
