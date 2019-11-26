@@ -388,6 +388,8 @@ function createAnimation() {
   const lastPanel = allPanels[allPanels.length - 1];
   const wait = `+=${settings.showDuration}`;
 
+  const resizeDuration = 0.8;
+
   let prevHeight = 0;
   let prevPanel = null;
   let prevIcon = null;
@@ -429,6 +431,8 @@ function createAnimation() {
     const tl = gsap.timeline();
     const headingTl = gsap.timeline();
     const subheadingTl = gsap.timeline();
+    const iconTl = gsap.timeline();
+    const imageTl = gsap.timeline();
 
     tl.add("start")
 
@@ -461,11 +465,11 @@ function createAnimation() {
     if (adjustWidth && panel !== firstPanel) {
 
       tl.to(popupIcons, {
-        duration: 1,
+        duration: resizeDuration,
         x: panel.iconX
       }, "resize")
       .to(popupBackground, {
-        duration: 1,
+        duration: resizeDuration,
         scaleX: panel.bgScale
       }, "resize");
     }
@@ -522,28 +526,96 @@ function createAnimation() {
         ease: "none",
       }, `resize+=${0.75 + subheadingDuration * 0.8}`);
     }
+
+    if (!icon && prevIcon) {
+
+      iconTl.to(prevIcon, {
+        xPercent: -100,
+        duration: 0.3
+      })
+      .set(prevIcon, {
+        autoAlpha: 0
+      }, ">");
+
+      tl.add(iconTl, "start+=0.3");
+    }
     
     if (icon) {
 
-      tl.set(icon, {
+      iconTl.set(icon, {
         autoAlpha: 1
-      })
+      }, 0)
       .to(icon, {
-        duration: 0.5,
+        duration: 0.3,
         xPercent: 0
-      })
+      }, 0);
+
+      if (prevIcon) {
+
+        iconTl.to(prevIcon, {
+          duration: 0.3,
+          xPercent: 100
+        }, 0)
+        .set(prevIcon, {
+          autoAlpha: 0
+        }, ">");
+      }
+
+      // tl.add(iconTl, `resize+=${resizeDuration * 0.9}`);
+      // tl.add(iconTl, "resize+=0.45");
+      tl.add(iconTl, "resize+=0.5");
+      // tl.add(iconTl, "resize+=0.3");
+    }
+
+    if (image) {
+
+      const imageDuration = 0.8;
+
+      imageTl.set(image, {
+        autoAlpha: 1
+      }, 0)
+      .to(image, {
+        duration: imageDuration,
+        yPercent: -100,
+        // y: `-=${panel.imageHeight}`,
+        // y: -panel.imageHeight
+      }, 0);
+
+      if (prevImage) {
+
+        imageTl.to(prevImage, {
+          duration: imageDuration,
+          y: `-=${panel.imageHeight}`
+        }, 0)
+        .to(prevImage, {
+          duration: imageDuration / 2,
+          autoAlpha: 0
+        }, 0);
+
+        // tl.add(imageTl, "start");
+
+      } else {
+
+        // tl.add(imageTl, "resize+=0.45");
+      }
+
+      // tl.add(imageTl, "resize+=0.3");
+      tl.add(imageTl, "resize+=0.5");
+      // tl.add(imageTl, "resize+=0.45");
+      // tl.add(imageTl, "resize");
     }
 
     tl.set({}, {}, wait);
 
     master.add(tl, panel !== firstPanel ? ">" : "-=0.5");
+    // master.add(tl, panel !== firstPanel ? ">" : "<0.25");
 
     // prevTextBoxMask = textBoxMask;
     prevIcon = icon;
     prevImage = image;
+    prevPanel = panel;
     prevHeading = heading;
     prevSubheading = subheading;
-    // prevPanel = panel;
   });
 
   if ($_devMode_$) {
