@@ -33,6 +33,36 @@
     "steps": 0.01,
     "folder": "Layout and style"
   },
+  "flipX": {
+    "label": "Flip X",
+    "type": "dropdown",
+    "value": "false",
+    "options": {
+        "true": "True",
+        "false": "False"
+    },
+    "folder": "Layout and style"
+  },
+  "flipY": {
+    "label": "Flip Y",
+    "type": "dropdown",
+    "value": "false",
+    "options": {
+        "true": "True",
+        "false": "False"
+    },
+    "folder": "Layout and style"
+  },
+  "alignment": {
+    "label": "Text and image alignment",
+    "type": "dropdown",
+    "value": "left",
+    "options": {
+        "left": "Left",
+        "right": "Right"
+    },
+    "folder": "Layout and style"
+  }, 
   "widthAdjust": {
     "label": "Width adjust",
     "type": "dropdown",
@@ -61,37 +91,6 @@
     "steps": 1,
     "folder": "Layout and style"
   },
-  "flipX": {
-    "label": "Flip X",
-    "type": "dropdown",
-    "value": "false",
-    "options": {
-        "true": "True",
-        "false": "False"
-    },
-    "folder": "Layout and style"
-  },
-  "flipY": {
-    "label": "Flip Y",
-    "type": "dropdown",
-    "value": "false",
-    "options": {
-        "true": "True",
-        "false": "False"
-    },
-    "folder": "Layout and style"
-  },
-  "imageAlign": {
-    "label": "Horizontal image alignment",
-    "type": "dropdown",
-    "value": "left",
-    "options": {
-        "left": "Left",
-        "center": "Center",
-        "right": "Right"
-    },
-    "folder": "Layout and style"
-  }, 
   "maxImageWidth": {
       "label": "Max image width",
       "type": "slider",

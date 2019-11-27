@@ -135,6 +135,7 @@ function positionElements() {
   popupIcons = select(".popup-icons");
 
   const adjustWidth = settings.widthAdjust.toLowerCase() === "auto";
+  const alignment = settings.alignment.toLowerCase();
   const startWidth = settings.textBoxWidth;
   const padX = settings.textBoxPadX;
   const padY = settings.textBoxPadY;
@@ -146,7 +147,6 @@ function positionElements() {
   const imageWidth = Math.min(settings.maxImageWidth, startWidth);
   const imageHeight = Math.min(settings.maxImageHeight, startWidth);
 
-  const imageAlign = settings.imageAlign;
   let maxImageHeight = 0;
 
   const headingSplit = new SplitText(".popup-text-box__heading", {
@@ -263,19 +263,15 @@ function positionElements() {
       let imageX = 0;
       let imagePercent = 0;
 
-      switch (imageAlign) {
-        case "left":          
-          imageX = flipX ? textBoxWidth : 0;
-          imagePercent = flipX ? -100 : 0;
-          break;
-        case "center":
-          imageX = textBoxWidth / 2;
-          imagePercent = -50;
-          break;
-        case "right":
-          imageX = flipX ? 0 : textBoxWidth;
-          imagePercent = flipX ? 0 : -100;
-          break;
+      if (alignment === "left") {
+
+        imageX = flipX ? textBoxWidth : 0;
+        imagePercent = flipX ? -100 : 0;
+
+      } else {
+
+        imageX = flipX ? 0 : textBoxWidth;
+        imagePercent = flipX ? 0 : -100;
       }
 
       gsap.set(image, {
@@ -284,12 +280,27 @@ function positionElements() {
       });
     }
 
+    if (alignment === "right") {
+
+      gsap.set(heading, {
+        x: (maskWidth - headingWidth) + panel.headingOverlow
+      });
+
+      if (subheading) {
+
+        gsap.set(subheading, {
+          x: (maskWidth - subheadingWidth) + panel.subheadingOverlow
+        });
+      }
+    }
+
     // gsap.set(heading, {
     //   y: `+=${15 / panel.textScale}`
     // });
 
     gsap.set(headingChars, {
-      y: `+=${15 / panel.textScale}`
+      // y: `+=${15 / panel.textScale}`
+      y: `+=${panel.headingHeight * 0.25 / panel.textScale}`
     });
   });
 
@@ -313,8 +324,7 @@ function positionElements() {
   });
 
   gsap.set(".popup-image", {
-    y: maxImageHeight * 2,
-    // yPercent: -100
+    y: maxImageHeight * 2
   });
 
   gsap.set(".popup-text-box__text", {
@@ -324,8 +334,6 @@ function positionElements() {
   // gsap.set(".popup-text-box__heading", {
   //   y: "+=15"
   // });
-
-
 
   gsap.set(headingSplit.chars, {
     opacity: 0
@@ -412,16 +420,14 @@ function createAnimation() {
 
   gsap.defaults({
     ease: "power4"
-    // ease: "easeOut",
-    // duration: 0.25
   });
 
   master
-    .set(popupHolder, { autoAlpha: 1 })
-    .to(popupContent, {
-      duration: 0.5,
-      xPercent: 0
-    });
+  .set(popupHolder, { autoAlpha: 1 })
+  .to(popupContent, {
+    duration: 0.5,
+    xPercent: 0
+  });
 
   allPanels.forEach(panel => {
 
@@ -480,27 +486,25 @@ function createAnimation() {
     tl.add("text");
 
     headingTl.set(heading, {
-        autoAlpha: 1
-      })
-      .to(headingChars, {
-        duration: 0.08,
-        opacity: 1,
-        y: 0,
-        ease: "power1",
-        stagger: 0.03
-      }, 0);
+      autoAlpha: 1
+    })
+    .to(headingChars, {
+      duration: 0.08,
+      opacity: 1,
+      y: 0,
+      stagger: 0.03
+    }, 0);
     
     if (subheading) {
 
       subheadingTl.set(subheading, {
-          autoAlpha: 1
-        })
-        .to(subheadingChars, {
-          duration: 0.08,
-          opacity: 1,
-          ease: "power1",
-          stagger: 0.03
-        });
+        autoAlpha: 1
+      })
+      .to(subheadingChars, {
+        duration: 0.08,
+        opacity: 1,
+        stagger: 0.03
+      });
     }
 
     const headingDuration = headingTl.duration();
@@ -516,7 +520,7 @@ function createAnimation() {
 
       tl.to(heading, {
         duration: Math.max(minOverflowDuration, panel.headingOverlow / overflowSpeed),
-        x: -panel.headingOverlow / panel.textScale,
+        x: `-=${panel.headingOverlow / panel.textScale}`,
         ease: "none",
       }, `resize+=${0.5 + headingDuration * 0.8}`);
     }
@@ -525,7 +529,7 @@ function createAnimation() {
 
       tl.to(subheading, {
         duration: Math.max(minOverflowDuration, panel.subheadingOverlow / overflowSpeed),
-        x: -panel.subheadingOverlow / panel.textScale,
+        x: `-=${panel.subheadingOverlow / panel.textScale}`,
         ease: "none",
       }, `resize+=${0.75 + subheadingDuration * 0.8}`);
     }
@@ -534,7 +538,8 @@ function createAnimation() {
 
       iconTl.to(prevIcon, {
         xPercent: -100,
-        duration: 0.3
+        duration: 0.3,
+        ease: "power1"
       })
       .set(prevIcon, {
         autoAlpha: 0
@@ -550,24 +555,23 @@ function createAnimation() {
       }, 0)
       .to(icon, {
         duration: 0.3,
-        xPercent: 0
+        xPercent: 0,
+        ease: "power1"
       }, 0);
 
       if (prevIcon) {
 
         iconTl.to(prevIcon, {
           duration: 0.3,
-          xPercent: 100
+          xPercent: 100,
+          ease: "power1"
         }, 0)
         .set(prevIcon, {
           autoAlpha: 0
         }, ">");
       }
 
-      // tl.add(iconTl, `resize+=${resizeDuration * 0.9}`);
-      // tl.add(iconTl, "resize+=0.45");
       tl.add(iconTl, "resize+=0.5");
-      // tl.add(iconTl, "resize+=0.3");
     }
 
     if (image) {
@@ -580,8 +584,6 @@ function createAnimation() {
       .to(image, {
         duration: imageDuration,
         yPercent: -100,
-        // y: `-=${panel.imageHeight}`,
-        // y: -panel.imageHeight
       }, 0);
 
       if (prevImage) {
@@ -594,34 +596,23 @@ function createAnimation() {
           duration: imageDuration / 2,
           autoAlpha: 0
         }, 0);
-
-        // tl.add(imageTl, "start");
-
-      } else {
-
-        // tl.add(imageTl, "resize+=0.45");
       }
 
-      // tl.add(imageTl, "resize+=0.3");
       tl.add(imageTl, "resize+=0.5");
-      // tl.add(imageTl, "resize+=0.45");
-      // tl.add(imageTl, "resize");
     }
 
     tl.set({}, {}, wait);
 
     master.add(tl, panel !== firstPanel ? ">" : "-=0.5");
-    // master.add(tl, panel !== firstPanel ? ">" : "<0.25");
 
-    // prevTextBoxMask = textBoxMask;
     prevIcon = icon;
     prevImage = image;
-    prevPanel = panel;
+    // prevPanel = panel;
     prevHeading = heading;
     prevSubheading = subheading;
   });
 
   if ($_devMode_$) {
-    ScrubGSAPTimeline(master);
+    // ScrubGSAPTimeline(master);
   }
 }
