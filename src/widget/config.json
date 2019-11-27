@@ -101,28 +101,10 @@
       "backgroundOpacity": {
         "type": "remove"
       },
-      "panel1_iconBackgroundOpacity": {
-        "type": "remove"
-      },
-      "panel2_iconBackgroundOpacity": {
-        "type": "remove"
-      },
-      "panel3_iconBackgroundOpacity": {
-        "type": "remove"
-      },
-      "panel4_iconBackgroundOpacity": {
-        "type": "remove"
-      },
-      "panel5_iconBackgroundOpacity": {
-        "type": "remove"
-      },
-      "megaPanel1_iconBackgroundOpacity": {
+      "iconOpacity": {
         "type": "remove"
       },
       "megaPanel1_imageBackgroundOpacity": {
-        "type": "remove"
-      },
-      "megaPanel2_iconBackgroundOpacity": {
         "type": "remove"
       },
       "megaPanel2_imageBackgroundOpacity": {

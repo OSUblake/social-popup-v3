@@ -1,6 +1,7 @@
 :root {
   --backgroundColor: $_backgroundColor_$;
   --backgroundOpacity: $_backgroundOpacity_$;
+  --iconOpacity: $_iconOpacity_$;
   
   --headingFont: '$_headingFont_$', sans-serif;
   --headingFontWeight: $_headingFontWeight_$;
@@ -19,27 +20,16 @@
   --subheadingColor: $_subheadingColor_$;
 
   --panel1_iconColor: $_panel1_iconColor_$;
-  --panel1_iconOpacity: $_panel1_iconOpacity_$;
-
   --panel2_iconColor: $_panel2_iconColor_$;
-  --panel2_iconOpacity: $_panel2_iconOpacity_$;
-
   --panel3_iconColor: $_panel3_iconColor_$;
-  --panel3_iconOpacity: $_panel3_iconOpacity_$;
-
   --panel4_iconColor: $_panel4_iconColor_$;
-  --panel4_iconOpacity: $_panel4_iconOpacity_$;
-
   --panel5_iconColor: $_panel5_iconColor_$;
-  --panel5_iconOpacity: $_panel5_iconOpacity_$;
 
   --megaPanel1_iconColor: $_megaPanel1_iconColor_$;
-  --megaPanel1_iconOpacity: $_megaPanel1_iconOpacity_$;
   --megaPanel1_imageColor: $_megaPanel1_imageColor_$;
   --megaPanel1_imageOpacity: $_megaPanel1_imageOpacity_$;
 
   --megaPanel2_iconColor: $_megaPanel2_iconColor_$;
-  --megaPanel2_iconOpacity: $_megaPanel2_iconOpacity_$;
   --megaPanel2_imageColor: $_megaPanel2_imageColor_$;
   --megaPanel2_imageOpacity: $_megaPanel2_imageOpacity_$;
 }
@@ -60,6 +50,7 @@
 .popup-content {
   width: var(--maxTextBoxWidth);
   height: var(--textBoxHeight);
+  will-change: transform;
 }
 
 .popup-background {
@@ -71,6 +62,7 @@
   background-color: var(--backgroundColor);
   opacity: var(--backgroundOpacity);
   transform-origin: left center;
+  will-change: transform;
 }
 
 .popup-text-boxes {
@@ -78,10 +70,9 @@
 }
 
 .popup-text-box {
+  position: absolute;
   top: 0;
   left: 0;
-  position: absolute;
-
   height: 100%;
   width: 100%;
 }
@@ -108,8 +99,7 @@
   position: absolute;
   top: 0;
   left: 0;
-
-  will-change: transform;
+  will-change: transform, opacity;
 }
 
 .popup-text-box__subheading {
@@ -120,8 +110,7 @@
   position: absolute;
   top: 0;
   left: 0;
-
-  will-change: transform;
+  will-change: transform, opacity;
 }
 
 .popup-icons {
@@ -142,10 +131,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  will-change: transform;
 }
 
 .popup-icon__background {
   position: absolute;
+  opacity: var(--iconOpacity);
   top: 0;
   left: 0;
   width: 100%;
@@ -170,7 +161,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  transform: translateY(-100%);
+  will-change: transform, opacity;
 }
 
 .popup-image__background {
@@ -192,43 +183,35 @@
 .popup-image__image {
   max-width: var(--maxImageWidth);
   max-height: var(--maxImageHeight);
-
   vertical-align: top;
 }
 
 .panel1 .popup-icon__background {
   background-color: var(--panel1_iconColor);
-  opacity: var(--panel1_iconOpacity);
 }
 
 .panel2 .popup-icon__background {
   background-color: var(--panel2_iconColor);
-  opacity: var(--panel2_iconOpacity);
 }
 
 .panel3 .popup-icon__background {
   background-color: var(--panel3_iconColor);
-  opacity: var(--panel3_iconOpacity);
 }
 
 .panel4 .popup-icon__background {
   background-color: var(--panel4_iconColor);
-  opacity: var(--panel4_iconOpacity);
 }
 
 .panel5 .popup-icon__background {
   background-color: var(--panel5_iconColor);
-  opacity: var(--panel5_iconOpacity);
 }
 
 .megaPanel1 .popup-icon__background {
   background-color: var(--megaPanel1_iconColor);
-  opacity: var(--megaPanel1_iconOpacity);
 }
 
 .megaPanel2 .popup-icon__background {
   background-color: var(--megaPanel2_iconColor);
-  opacity: var(--megaPanel2_iconOpacity);
 }
 
 .megaPanel1 .popup-image__background {

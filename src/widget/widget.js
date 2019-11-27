@@ -25,7 +25,7 @@ const popupHolder = select(".popup-holder");
 let popupContent, popupBackground, popupIcons;
 
 Promise.all([
-  ...loadFonts(settings.headingFont, settings.subheadingFont),
+  loadFonts(settings.headingFont, settings.subheadingFont),
   ...loadImages(allPanels),
   ...loadScripts(scriptPaths)
 ])
@@ -134,16 +134,17 @@ function positionElements() {
   popupContent = select(".popup-content");
   popupIcons = select(".popup-icons");
 
+  const firstPanel = allPanels[0];
+
   const adjustWidth = settings.widthAdjust.toLowerCase() === "auto";
   const alignment = settings.alignment.toLowerCase();
   const startWidth = settings.textBoxWidth;
-  const padX = settings.textBoxPadX;
-  const padY = settings.textBoxPadY;
+  const padX = settings.padX;
+  const padY = settings.padY;
   const flipX = settings.flipX;
   const flipY = settings.flipY;
 
   const maxTextBoxHeight = (settings.textBoxHeight - padY * 2);
-
   const imageWidth = Math.min(settings.maxImageWidth, startWidth);
   const imageHeight = Math.min(settings.maxImageHeight, startWidth);
 
@@ -160,6 +161,7 @@ function positionElements() {
   allPanels.forEach(panel => {
 
     const icon = select(`.${panel.id}.popup-icon`);
+    const iconElement = select(`.${panel.id} .popup-icon__image`);
 
     const image = select(`.${panel.id}.popup-image`);
     const imageElement = select(`.${panel.id} .popup-image__image`);
@@ -250,7 +252,17 @@ function positionElements() {
     panel.subheadingOverlow = Math.max(0, subheadingWidth - maskWidth);
 
     panel.targets = {
-      icon, image, imageElement, textBox, textBoxText, textBoxMask, heading, headingChars, subheading, subheadingChars
+      icon, 
+      iconElement, 
+      image, 
+      imageElement, 
+      textBox, 
+      textBoxText, 
+      textBoxMask, 
+      heading, 
+      headingChars, 
+      subheading, 
+      subheadingChars
     };
 
     gsap.set(textBoxMask, {
@@ -294,17 +306,10 @@ function positionElements() {
       }
     }
 
-    // gsap.set(heading, {
-    //   y: `+=${15 / panel.textScale}`
-    // });
-
     gsap.set(headingChars, {
-      // y: `+=${15 / panel.textScale}`
       y: `+=${panel.headingHeight * 0.25 / panel.textScale}`
     });
   });
-
-  const firstPanel = allPanels[0];
 
   gsap.set(popupIcons, {
     x: firstPanel.iconX
@@ -331,10 +336,6 @@ function positionElements() {
     yPercent: -50
   });
 
-  // gsap.set(".popup-text-box__heading", {
-  //   y: "+=15"
-  // });
-
   gsap.set(headingSplit.chars, {
     opacity: 0
   });
@@ -348,7 +349,7 @@ function positionElements() {
   });
 
   gsap.set(".popup-icon, .popup-image, .popup-text-box__heading, .popup-text-box__subheading", {
-    autoAlpha: 0
+    opacity: 0
   });
 
   gsap.set(popupContent, {
@@ -378,15 +379,30 @@ function positionElements() {
     });
   }
 
+  if (firstPanel.icon) {
+
+    gsap.set(firstPanel.targets.icon, {
+      opacity: 1,
+      xPercent: 0
+    });
+
+    gsap.set(firstPanel.targets.iconElement, {
+      x: -settings.textBoxHeight
+    });
+  }
+
   selectAll(".dummy").forEach(element => element.remove());
 }
 
 function createAnimation() {
   
+  CustomEase.create("easeIn", "0.549, 0, 0.757, 0.460");
+  CustomEase.create("easeOut", "0.149, 0.453, 0.329, 1");
+  CustomEase.create("easeInOut", "M0,0C0.16564702500000003,0,0.228405825,0.17109424,0.301725,0.371944,0.405767975,0.656453368,0.5314574750000001,1,1,1"); 
+
   const {
     minOverflowDuration,
     overflowSpeed,
-    resizeSpeed,
     textBoxHeight
   } = settings;
 
@@ -397,42 +413,44 @@ function createAnimation() {
   const wait = `+=${settings.showDuration}`;
 
   const resizeDuration = 0.8;
+  const showHideEase = "power1";
+  const iconEase = "power1";
+  const resizeEase = "power4";
 
-  let prevHeight = 0;
-  let prevPanel = null;
+  // let prevPanel = null;
   let prevIcon = null;
   let prevImage = null;
   let prevHeading = null;
   let prevSubheading = null;
-  let prevTextBoxMask = null;
-  
-  const master = gsap.timeline({
-    // repeat: -1,
-    // repeatDelay: settings.replayWait
-  });
-
-  const peakTime = 0.301725; // x-axis
-  const peakProgress = 0.371944; // y-axis
-
-  CustomEase.create("easeIn", "0.549, 0, 0.757, 0.460");
-  CustomEase.create("easeOut", "0.149, 0.453, 0.329, 1");
-  CustomEase.create("easeInOut", "M0,0C0.16564702500000003,0,0.228405825,0.17109424,0.301725,0.371944,0.405767975,0.656453368,0.5314574750000001,1,1,1"); 
 
   gsap.defaults({
     ease: "power4"
-  });
+  }); 
+  
+  const outroTl = gsap.timeline();
+  const master = gsap.timeline({
+    repeat: 1,
+    // repeat: -1,
+    // repeatDelay: settings.replayWait
+  });   
 
-  master
-  .set(popupHolder, { autoAlpha: 1 })
+  master.set(popupHolder, { autoAlpha: 1 })
   .to(popupContent, {
     duration: 0.5,
-    xPercent: 0
+    xPercent: 0,
+    ease: showHideEase
   });
 
   allPanels.forEach(panel => {
 
     const { 
-      icon, image, imageElement, textBox, textBoxText, textBoxMask, heading, headingChars, subheading, subheadingChars 
+      icon, 
+      iconElement, 
+      image, 
+      heading, 
+      headingChars, 
+      subheading, 
+      subheadingChars 
     } = panel.targets;
 
     const tl = gsap.timeline();
@@ -440,6 +458,8 @@ function createAnimation() {
     const subheadingTl = gsap.timeline();
     const iconTl = gsap.timeline();
     const imageTl = gsap.timeline();
+
+    const isFirstPanel = (panel === firstPanel);
 
     tl.add("start")
 
@@ -451,7 +471,7 @@ function createAnimation() {
         ease: "power1"
       }, "start")
       .set(prevHeading, {
-        autoAlpha: 0
+        opacity: 0
       }, ">");
     }
 
@@ -463,30 +483,28 @@ function createAnimation() {
         ease: "power1"
       }, "start+=0.06")
       .set(prevSubheading, {
-        autoAlpha: 0
+        opacity: 0
       }, ">");
     }
 
     tl.add("resize", prevHeading ? "-=0.2" : 0);
 
-    if (adjustWidth && panel !== firstPanel) {
+    if (adjustWidth && !isFirstPanel) {
 
       tl.to(popupIcons, {
         duration: resizeDuration,
         x: panel.iconX,
-        ease: "power4"
+        ease: resizeEase
       }, "resize")
       .to(popupBackground, {
         duration: resizeDuration,
         scaleX: panel.bgScale,
-        ease: "power4"
+        ease: resizeEase
       }, "resize");
     }
 
-    tl.add("text");
-
     headingTl.set(heading, {
-      autoAlpha: 1
+      opacity: 1
     })
     .to(headingChars, {
       duration: 0.08,
@@ -498,7 +516,7 @@ function createAnimation() {
     if (subheading) {
 
       subheadingTl.set(subheading, {
-        autoAlpha: 1
+        opacity: 1
       })
       .to(subheadingChars, {
         duration: 0.08,
@@ -509,9 +527,6 @@ function createAnimation() {
 
     const headingDuration = headingTl.duration();
     const subheadingDuration = subheadingTl.duration();
-
-    // headingTl.duration(0.75);
-    // subheadingTl.duration(0.75);
 
     tl.add(headingTl, "resize+=0.5");
     tl.add(subheadingTl, "resize+=0.75");
@@ -539,10 +554,10 @@ function createAnimation() {
       iconTl.to(prevIcon, {
         xPercent: -100,
         duration: 0.3,
-        ease: "power1"
+        ease: iconEase
       })
       .set(prevIcon, {
-        autoAlpha: 0
+        opacity: 0
       }, ">");
 
       tl.add(iconTl, "start+=0.3");
@@ -551,23 +566,32 @@ function createAnimation() {
     if (icon) {
 
       iconTl.set(icon, {
-        autoAlpha: 1
+        opacity: 1
       }, 0)
       .to(icon, {
         duration: 0.3,
         xPercent: 0,
-        ease: "power1"
+        ease: iconEase
       }, 0);
+
+      if (isFirstPanel) {
+
+        iconTl.to(iconElement, {
+          duration: 0.3,
+          x: 0,
+          ease: iconEase
+        }, 0);
+      }
 
       if (prevIcon) {
 
         iconTl.to(prevIcon, {
           duration: 0.3,
           xPercent: 100,
-          ease: "power1"
+          ease: iconEase
         }, 0)
         .set(prevIcon, {
-          autoAlpha: 0
+          opacity: 0
         }, ">");
       }
 
@@ -579,7 +603,7 @@ function createAnimation() {
       const imageDuration = 0.8;
 
       imageTl.set(image, {
-        autoAlpha: 1
+        opacity: 1
       }, 0)
       .to(image, {
         duration: imageDuration,
@@ -594,7 +618,7 @@ function createAnimation() {
         }, 0)
         .to(prevImage, {
           duration: imageDuration / 2,
-          autoAlpha: 0
+          opacity: 0
         }, 0);
       }
 
@@ -603,7 +627,7 @@ function createAnimation() {
 
     tl.set({}, {}, wait);
 
-    master.add(tl, panel !== firstPanel ? ">" : "-=0.5");
+    master.add(tl, isFirstPanel ? "-=0.5" : ">");
 
     prevIcon = icon;
     prevImage = image;
@@ -612,7 +636,18 @@ function createAnimation() {
     prevSubheading = subheading;
   });
 
-  if ($_devMode_$) {
-    // ScrubGSAPTimeline(master);
-  }
+  const contentX = prevIcon ? -textBoxHeight : 0;
+
+  outroTl.to(popupContent, {
+    duration: 0.5,
+    xPercent: -100,
+    x: contentX,
+    ease: showHideEase
+  });
+
+  master.add(outroTl);
+
+  // if ($_devMode_$) {
+  //   ScrubGSAPTimeline(master);
+  // }
 }

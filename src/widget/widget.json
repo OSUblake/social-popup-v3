@@ -3,7 +3,7 @@
     "label": "Show duration",
     "type": "slider",
     "value": 1,
-    "min": 0.5,
+    "min": 0,
     "max": 5,
     "steps": 0.1,
     "folder": "Animation settings"
@@ -12,7 +12,7 @@
     "label": "Replay wait",
     "type": "slider",
     "value": 1,
-    "min": 0.5,
+    "min": 0,
     "max": 5,
     "steps": 0.1,
     "folder": "Animation settings"
@@ -26,6 +26,15 @@
   },
   "backgroundOpacity": {
     "label": "Background opacity",
+    "type": "slider",
+    "value": 1,
+    "min": 0,
+    "max": 1,
+    "steps": 0.01,
+    "folder": "Layout and style"
+  },
+  "iconOpacity": {
+    "label": "Icon background opacity",
     "type": "slider",
     "value": 1,
     "min": 0,
@@ -132,7 +141,9 @@
       "300": "Light (300)",
       "400": "Regular (400)",
       "500": "Medium (500)",
+      "600": "Semi-bold (600)",
       "700": "Bold (700)",
+      "800": "Extra-bold (800)",
       "900": "Black (900)"
     },
     "folder": "Text settings"
@@ -169,7 +180,9 @@
       "300": "Light (300)",
       "400": "Regular (400)",
       "500": "Medium (500)",
+      "600": "Semi-bold (600)",
       "700": "Bold (700)",
+      "800": "Extra-bold (800)",
       "900": "Black (900)"
     },
     "folder": "Text settings"
@@ -218,17 +231,7 @@
     "type": "colorpicker",
     "value": "#181818",
     "folder": ["Standard Panels", "Panel 1"]
-  },
-  "panel1_iconOpacity": {
-    "label": "Panel 1 icon background opacity",
-    "type": "slider",
-    "value": 1,
-    "min": 0,
-    "max": 1,
-    "steps": 0.01,
-    "folder": ["Standard Panels", "Panel 1"]
-  },
-  
+  },  
   
   "panel2_heading": {
     "label": "Panel 2 heading",
@@ -252,15 +255,6 @@
     "label": "Panel 2 icon background color",
     "type": "colorpicker",
     "value": "#181818",
-    "folder": ["Standard Panels", "Panel 2"]
-  },
-  "panel2_iconOpacity": {
-    "label": "Panel 2 icon background opacity",
-    "type": "slider",
-    "value": 1,
-    "min": 0,
-    "max": 1,
-    "steps": 0.01,
     "folder": ["Standard Panels", "Panel 2"]
   },
   
@@ -288,15 +282,6 @@
     "value": "#181818",
     "folder": ["Standard Panels", "Panel 3"]
   },
-  "panel3_iconOpacity": {
-    "label": "Panel 3 icon background opacity",
-    "type": "slider",
-    "value": 1,
-    "min": 0,
-    "max": 1,
-    "steps": 0.01,
-    "folder": ["Standard Panels", "Panel 3"]
-  },
   
   "panel4_heading": {
     "label": "Panel 4 heading",
@@ -322,15 +307,6 @@
     "value": "#181818",
     "folder": ["Standard Panels", "Panel 4"]
   },
-  "panel4_iconOpacity": {
-    "label": "Panel 4 icon background opacity",
-    "type": "slider",
-    "value": 1,
-    "min": 0,
-    "max": 1,
-    "steps": 0.01,
-    "folder": ["Standard Panels", "Panel 4"]
-  },
   
   "panel5_heading": {
     "label": "Panel 5 heading",
@@ -354,15 +330,6 @@
     "label": "Panel 5 icon background color",
     "type": "colorpicker",
     "value": "#181818",
-    "folder": ["Standard Panels", "Panel 5"]
-  },
-  "panel5_iconOpacity": {
-    "label": "Panel 5 icon background opacity",
-    "type": "slider",
-    "value": 1,
-    "min": 0,
-    "max": 1,
-    "steps": 0.01,
     "folder": ["Standard Panels", "Panel 5"]
   },
     
@@ -398,15 +365,6 @@
     "label": "Mega panel 1 icon background color",
     "type": "colorpicker",
     "value": "#181818",
-    "folder": ["Mega Panels", "Mega Panel 1"]
-  },
-  "megaPanel1_iconOpacity": {
-    "label": "Mega panel 1 icon background opacity",
-    "type": "slider",
-    "value": 1,
-    "min": 0,
-    "max": 1,
-    "steps": 0.01,
     "folder": ["Mega Panels", "Mega Panel 1"]
   },
   "megaPanel1_image": {
@@ -453,15 +411,6 @@
     "label": "Mega panel 2 icon background color",
     "type": "colorpicker",
     "value": "#181818",
-    "folder": ["Mega Panels", "Mega Panel 2"]
-  },
-  "megaPanel2_iconOpacity": {
-    "label": "Mega panel 2 icon background opacity",
-    "type": "slider",
-    "value": 1,
-    "min": 0,
-    "max": 1,
-    "steps": 0.01,
     "folder": ["Mega Panels", "Mega Panel 2"]
   },
   "megaPanel2_image": {
