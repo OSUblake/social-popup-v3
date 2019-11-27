@@ -183,19 +183,35 @@ function buildGui(gui, fields) {
     let folder = gui;
     let controller;
 
-    if (field.folder) {
+    // if (field.folder) {
 
-      if (!Array.isArray(field.folder)) {
-        field.folder = [field.folder];
+    //   if (!Array.isArray(field.folder)) {
+    //     field.folder = [field.folder];
+    //   }
+
+    //   field.folder.forEach(folderName => {
+
+    //     if (!folders.has(folderName)) {
+    //       folders.set(folderName, folder.addFolder(folderName));
+    //     }
+
+    //     folder = folders.get(folderName);
+    //   });
+    // }
+
+    if (field.group) {
+
+      if (!Array.isArray(field.group)) {
+        field.group = [field.group];
       }
 
-      field.folder.forEach(folderName => {
+      field.group.forEach(groupName => {
 
-        if (!folders.has(folderName)) {
-          folders.set(folderName, folder.addFolder(folderName));
+        if (!folders.has(groupName)) {
+          folders.set(groupName, folder.addFolder(groupName));
         }
 
-        folder = folders.get(folderName);
+        folder = folders.get(groupName);
       });
     }
 

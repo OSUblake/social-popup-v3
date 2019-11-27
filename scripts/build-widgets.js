@@ -18,6 +18,8 @@ const fileNames = [
   "widget.js"
 ];
 
+const printWidth = 120;
+
 let config, json, html, css, js, fields;
 
 buildWidgets();
@@ -29,15 +31,18 @@ async function buildWidgets() {
   fields = JSON.parse(json);
 
   html = prettier.format(html, {
-    parser: "html"
+    parser: "html",
+    printWidth
   });
 
   css = prettier.format(css, {
-    parser: "css"
+    parser: "css",
+    printWidth
   });
 
   js = prettier.format(js, {
-    parser: "babel"
+    parser: "babel",
+    printWidth
   });
   
   const tags = config.tags || ["$_","_$"];
@@ -153,12 +158,24 @@ async function createStreamlabs({ fields, config, compile }) {
         break;
     }
 
+    if (fields[key]) {
+      
+      if (field.desc) {
+        fields[key].desc = field.desc;
+      }
+
+      if (field.group) {
+        const group = Array.isArray(field.group) ? field.group[field.group.length - 1] : field.group;
+        fields[key].group = group;
+      }
+    }
   });
   
   createDir(streamlabsDir);
 
   const json = prettier.format(JSON.stringify(fields), {
-    parser: "json-stringify"
+    parser: "json-stringify",
+    printWidth
   });
 
   const html = compile.html(settings);
@@ -269,7 +286,8 @@ async function createStreamElements({ fields, config, compile }) {
   createDir(streamElementsDir);
 
   const json = prettier.format(JSON.stringify(fields), {
-    parser: "json-stringify"
+    parser: "json-stringify",
+    printWidth
   });
 
   const html = compile.html(settings);

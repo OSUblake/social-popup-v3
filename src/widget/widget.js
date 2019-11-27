@@ -429,9 +429,9 @@ function createAnimation() {
   
   const outroTl = gsap.timeline();
   const master = gsap.timeline({
-    repeat: 1,
-    // repeat: -1,
-    // repeatDelay: settings.replayWait
+    // repeat: 1,
+    repeat: -1,
+    repeatDelay: settings.replayWait
   });   
 
   master.set(popupHolder, { autoAlpha: 1 })

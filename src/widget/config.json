@@ -121,6 +121,14 @@
       "\"https://ext-assets.streamlabs.com/users/140067/gsap.min.js\"",
       "\"https://ext-assets.streamlabs.com/users/140067/SplitText.min.js\"",
       "\"https://ext-assets.streamlabs.com/users/140067/CustomEase.min.js\""
-    ]
+    ],
+    "customFields": {
+      "numPanels": {
+        "group": ""
+      },
+      "numMegaPanels": {
+        "group": ""
+      }
+    }
   }
 }

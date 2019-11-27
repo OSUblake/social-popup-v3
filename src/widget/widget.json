@@ -6,7 +6,7 @@
     "min": 0,
     "max": 5,
     "steps": 0.1,
-    "folder": "Animation settings"
+    "group": "Animation settings"
   },
   "replayWait": {
     "label": "Replay wait",
@@ -15,14 +15,14 @@
     "min": 0,
     "max": 5,
     "steps": 0.1,
-    "folder": "Animation settings"
+    "group": "Animation settings"
   },
   
   "backgroundColor": {
     "label": "Background color",
     "type": "colorpicker",
     "value": "#DBF0EB",
-    "folder": "Layout and style"
+    "group": "Layout and style"
   },
   "backgroundOpacity": {
     "label": "Background opacity",
@@ -31,7 +31,7 @@
     "min": 0,
     "max": 1,
     "steps": 0.01,
-    "folder": "Layout and style"
+    "group": "Layout and style"
   },
   "iconOpacity": {
     "label": "Icon background opacity",
@@ -40,7 +40,7 @@
     "min": 0,
     "max": 1,
     "steps": 0.01,
-    "folder": "Layout and style"
+    "group": "Layout and style"
   },
   "flipX": {
     "label": "Flip X",
@@ -50,7 +50,7 @@
         "true": "True",
         "false": "False"
     },
-    "folder": "Layout and style"
+    "group": "Layout and style"
   },
   "flipY": {
     "label": "Flip Y",
@@ -60,7 +60,7 @@
         "true": "True",
         "false": "False"
     },
-    "folder": "Layout and style"
+    "group": "Layout and style"
   },
   "alignment": {
     "label": "Text and image alignment",
@@ -70,7 +70,7 @@
         "left": "Left",
         "right": "Right"
     },
-    "folder": "Layout and style"
+    "group": "Layout and style"
   }, 
   "widthAdjust": {
     "label": "Width adjust",
@@ -80,7 +80,7 @@
         "auto": "Auto",
         "fixed": "Fixed"
     },
-    "folder": "Layout and style"
+    "group": "Layout and style"
   },  
   "maxTextBoxWidth": {
     "label": "Max text box width",
@@ -89,7 +89,7 @@
     "min": 400,
     "max": 1000,
     "steps": 1,
-    "folder": "Layout and style"
+    "group": "Layout and style"
   },
   "textBoxHeight": {
     "label": "Text box height",
@@ -98,7 +98,7 @@
     "min": 50,
     "max": 150,
     "steps": 1,
-    "folder": "Layout and style"
+    "group": "Layout and style"
   },
   "maxImageWidth": {
       "label": "Max image width",
@@ -107,7 +107,7 @@
       "min": 100,
       "max": 1000,
       "steps": 1,
-      "folder": "Layout and style"
+      "group": "Layout and style"
   },
   "maxImageHeight": {
       "label": "Max image height",
@@ -116,7 +116,7 @@
       "min": 100,
       "max": 1000,
       "steps": 1,
-      "folder": "Layout and style"
+      "group": "Layout and style"
   },
 
   
@@ -124,13 +124,13 @@
     "label": "Heading font color",
     "type": "colorpicker",
     "value": "#000000",
-    "folder": "Text settings"
+    "group": "Text settings"
   },
   "headingFont": {
     "label": "Heading Font",
     "type": "googleFont",
     "value": "Oswald",
-    "folder": "Text settings"
+    "group": "Text settings"
   },
   "headingFontWeight": {
     "label": "Heading font weight",
@@ -146,7 +146,7 @@
       "800": "Extra-bold (800)",
       "900": "Black (900)"
     },
-    "folder": "Text settings"
+    "group": "Text settings"
   },  
   "headingFontSize": {
     "label": "Heading font size",
@@ -155,7 +155,7 @@
     "min": 12,
     "max": 100,
     "steps": 1,
-    "folder": "Text settings"
+    "group": "Text settings"
   },
 
 
@@ -163,13 +163,13 @@
     "label": "Subheading font color",
     "type": "colorpicker",
     "value": "#000000",
-    "folder": "Text settings"
+    "group": "Text settings"
   },
   "subheadingFont": {
     "label": "Subheading font",
     "type": "googleFont",
     "value": "Lato",
-    "folder": "Text settings"
+    "group": "Text settings"
   },
   "subheadingFontWeight": {
     "label": "Subheading font weight",
@@ -185,7 +185,7 @@
       "800": "Extra-bold (800)",
       "900": "Black (900)"
     },
-    "folder": "Text settings"
+    "group": "Text settings"
   },   
   "subheadingFontSize": {
     "label": "Subheading font size",
@@ -194,7 +194,7 @@
     "min": 12,
     "max": 80,
     "steps": 1,
-    "folder": "Text settings"
+    "group": "Text settings"
   },
    
    
@@ -205,132 +205,132 @@
       "min": 0,
       "max": 5,
       "steps": 1,
-      "folder": "Standard Panels"
+      "group": "Standard Panels"
   },
      
   "panel1_heading": {
     "label": "Panel 1 heading",
     "type": "text",
     "value": "",
-    "folder": ["Standard Panels", "Panel 1"]
+    "group": ["Standard Panels", "Panel 1"]
   },
   "panel1_subheading": {
     "label": "Panel 1 subheading",
     "type": "text",
     "value": "",
-    "folder": ["Standard Panels", "Panel 1"]
+    "group": ["Standard Panels", "Panel 1"]
   },
   "panel1_icon": {
     "label": "Panel 1 icon",
     "type": "image-input",
     "value": "",
-    "folder": ["Standard Panels", "Panel 1"]
+    "group": ["Standard Panels", "Panel 1"]
   },
   "panel1_iconColor": {
     "label": "Panel 1 icon background color",
     "type": "colorpicker",
     "value": "#181818",
-    "folder": ["Standard Panels", "Panel 1"]
+    "group": ["Standard Panels", "Panel 1"]
   },  
   
   "panel2_heading": {
     "label": "Panel 2 heading",
     "type": "text",
     "value": "",
-    "folder": ["Standard Panels", "Panel 2"]
+    "group": ["Standard Panels", "Panel 2"]
   },
   "panel2_subheading": {
     "label": "Panel 2 subheading",
     "type": "text",
     "value": "",
-    "folder": ["Standard Panels", "Panel 2"]
+    "group": ["Standard Panels", "Panel 2"]
   },
   "panel2_icon": {
     "label": "Panel 2 icon",
     "type": "image-input",
     "value": "",
-    "folder": ["Standard Panels", "Panel 2"]
+    "group": ["Standard Panels", "Panel 2"]
   },
   "panel2_iconColor": {
     "label": "Panel 2 icon background color",
     "type": "colorpicker",
     "value": "#181818",
-    "folder": ["Standard Panels", "Panel 2"]
+    "group": ["Standard Panels", "Panel 2"]
   },
   
   "panel3_heading": {
     "label": "Panel 3 heading",
     "type": "text",
     "value": "",
-    "folder": ["Standard Panels", "Panel 3"]
+    "group": ["Standard Panels", "Panel 3"]
   },
   "panel3_subheading": {
     "label": "Panel 3 subheading",
     "type": "text",
     "value": "",
-    "folder": ["Standard Panels", "Panel 3"]
+    "group": ["Standard Panels", "Panel 3"]
   },
   "panel3_icon": {
     "label": "Panel 3 Icon",
     "type": "image-input",
     "value": "",
-    "folder": ["Standard Panels", "Panel 3"]
+    "group": ["Standard Panels", "Panel 3"]
   },
   "panel3_iconColor": {
     "label": "Panel 3 icon background color",
     "type": "colorpicker",
     "value": "#181818",
-    "folder": ["Standard Panels", "Panel 3"]
+    "group": ["Standard Panels", "Panel 3"]
   },
   
   "panel4_heading": {
     "label": "Panel 4 heading",
     "type": "text",
     "value": "",
-    "folder": ["Standard Panels", "Panel 4"]
+    "group": ["Standard Panels", "Panel 4"]
   },
   "panel4_subheading": {
     "label": "Panel 4 subheading",
     "type": "text",
     "value": "",
-    "folder": ["Standard Panels", "Panel 4"]
+    "group": ["Standard Panels", "Panel 4"]
   },
   "panel4_icon": {
     "label": "Panel 4 icon",
     "type": "image-input",
     "value": "",
-    "folder": ["Standard Panels", "Panel 4"]
+    "group": ["Standard Panels", "Panel 4"]
   },
   "panel4_iconColor": {
     "label": "Panel 4 icon background color",
     "type": "colorpicker",
     "value": "#181818",
-    "folder": ["Standard Panels", "Panel 4"]
+    "group": ["Standard Panels", "Panel 4"]
   },
   
   "panel5_heading": {
     "label": "Panel 5 heading",
     "type": "text",
     "value": "",
-    "folder": ["Standard Panels", "Panel 5"]
+    "group": ["Standard Panels", "Panel 5"]
   },
   "panel5_subheading": {
     "label": "Panel 5 subheading",
     "type": "text",
     "value": "",
-    "folder": ["Standard Panels", "Panel 5"]
+    "group": ["Standard Panels", "Panel 5"]
   },
   "panel5_icon": {
     "label": "Panel 5 icon",
     "type": "image-input",
     "value": "",
-    "folder": ["Standard Panels", "Panel 5"]
+    "group": ["Standard Panels", "Panel 5"]
   },
   "panel5_iconColor": {
     "label": "Panel 5 icon background color",
     "type": "colorpicker",
     "value": "#181818",
-    "folder": ["Standard Panels", "Panel 5"]
+    "group": ["Standard Panels", "Panel 5"]
   },
     
   "numMegaPanels": {
@@ -340,44 +340,44 @@
       "min": 0,
       "max": 2,
       "steps": 1,
-      "folder": "Mega Panels"
+      "group": "Mega Panels"
   },
   
   "megaPanel1_heading": {
     "label": "Mega panel 1 heading",
     "type": "text",
     "value": "",
-    "folder": ["Mega Panels", "Mega Panel 1"]
+    "group": ["Mega Panels", "Mega Panel 1"]
   },
   "megaPanel1_subheading": {
     "label": "Mega panel 1 subheading",
     "type": "text",
     "value": "",
-    "folder": ["Mega Panels", "Mega Panel 1"]
+    "group": ["Mega Panels", "Mega Panel 1"]
   },
   "megaPanel1_icon": {
     "label": "Mega panel 1 icon",
     "type": "image-input",
     "value": "",
-    "folder": ["Mega Panels", "Mega Panel 1"]
+    "group": ["Mega Panels", "Mega Panel 1"]
   },
   "megaPanel1_iconColor": {
     "label": "Mega panel 1 icon background color",
     "type": "colorpicker",
     "value": "#181818",
-    "folder": ["Mega Panels", "Mega Panel 1"]
+    "group": ["Mega Panels", "Mega Panel 1"]
   },
   "megaPanel1_image": {
     "label": "Mega panel 1 image",
     "type": "image-input",
     "value": "",
-    "folder": ["Mega Panels", "Mega Panel 1"]
+    "group": ["Mega Panels", "Mega Panel 1"]
   },
   "megaPanel1_imageColor": {
     "label": "Mega panel 1 image background color",
     "type": "colorpicker",
     "value": "#ffffff",
-    "folder": ["Mega Panels", "Mega Panel 1"]
+    "group": ["Mega Panels", "Mega Panel 1"]
   },
   "megaPanel1_imageOpacity": {
     "label": "Mega panel 1 image background opacity",
@@ -386,44 +386,44 @@
     "min": 0,
     "max": 1,
     "steps": 0.01,
-    "folder": ["Mega Panels", "Mega Panel 1"]
+    "group": ["Mega Panels", "Mega Panel 1"]
   },
   
   "megaPanel2_heading": {
     "label": "Mega panel 2 heading",
     "type": "text",
     "value": "",
-    "folder": ["Mega Panels", "Mega Panel 2"]
+    "group": ["Mega Panels", "Mega Panel 2"]
   },
   "megaPanel2_subheading": {
     "label": "Mega panel 2 subheading",
     "type": "text",
     "value": "",
-    "folder": ["Mega Panels", "Mega Panel 2"]
+    "group": ["Mega Panels", "Mega Panel 2"]
   },
   "megaPanel2_icon": {
     "label": "Mega panel 2 icon",
     "type": "image-input",
     "value": "",
-    "folder": ["Mega Panels", "Mega Panel 2"]
+    "group": ["Mega Panels", "Mega Panel 2"]
   },
   "megaPanel2_iconColor": {
     "label": "Mega panel 2 icon background color",
     "type": "colorpicker",
     "value": "#181818",
-    "folder": ["Mega Panels", "Mega Panel 2"]
+    "group": ["Mega Panels", "Mega Panel 2"]
   },
   "megaPanel2_image": {
     "label": "Mega panel 2 image",
     "type": "image-input",
     "value": "",
-    "folder": ["Mega Panels", "Mega Panel 2"]
+    "group": ["Mega Panels", "Mega Panel 2"]
   },
   "megaPanel2_imageColor": {
     "label": "Mega panel 2 image background color",
     "type": "colorpicker",
     "value": "#ffffff",
-    "folder": ["Mega Panels", "Mega Panel 2"]
+    "group": ["Mega Panels", "Mega Panel 2"]
   },
   "megaPanel2_imageOpacity": {
     "label": "Mega panel 2 image background opacity",
@@ -432,6 +432,6 @@
     "min": 0,
     "max": 1,
     "steps": 0.01,
-    "folder": ["Mega Panels", "Mega Panel 2"]
+    "group": ["Mega Panels", "Mega Panel 2"]
   }  
 }
