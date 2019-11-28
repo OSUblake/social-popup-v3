@@ -20,7 +20,7 @@ export default function(font1, font2) {
     ])
     .then(res => resolve())
     .catch(err => {
-      console.warn("Skipped loading font", err);
+      console.warn("Font", err);
       resolve();
     });
   });

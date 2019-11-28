@@ -13,7 +13,7 @@ function loadScript(src) {
     function fulfill(event) {
       script.onload = undefined;
       script.onerror = undefined;
-      resolve(script);
+      resolve();
     }
   });
 }

@@ -137,25 +137,21 @@ function positionElements() {
   popupContent = select(".popup-content");
   popupIcons = select(".popup-icons");
 
-  const firstPanel = allPanels[0];
-
-  const adjustWidth = settings.widthAdjust.toLowerCase() === "auto";
-  const alignment = settings.alignment.toLowerCase();
-
   const {
     textBoxWidth: startWidth,
+    widgetFlipX: flipX,
+    widgetFlipY: flipY,
     headingOffset,
-    flipX,
-    flipY,
     padX,
     padY
   } = settings;
 
+  const adjustWidth = settings.widthAdjust.toLowerCase() === "auto";
+  const alignment = settings.alignment.toLowerCase();
   const maxTextBoxHeight = (settings.textBoxHeight - padY * 2);
   const imageWidth = Math.min(settings.maxImageWidth, startWidth);
   const imageHeight = Math.min(settings.maxImageHeight, startWidth);
-
-  let maxImageHeight = 0;
+  const firstPanel = allPanels[0];
 
   const headingSplit = new SplitText(".popup-text-box__heading", {
     type: "chars"
@@ -164,14 +160,10 @@ function positionElements() {
   const subheadingSplit = new SplitText(".popup-text-box__subheading", {
     type: "chars"
   });
+
+  let maxImageHeight = 0;
     
   allPanels.forEach(panel => {
-
-    const icon = select(`.${panel.id}.popup-icon`);
-    const iconElement = select(`.${panel.id} .popup-icon__image`);
-
-    const image = select(`.${panel.id}.popup-image`);
-    const imageElement = select(`.${panel.id} .popup-image__image`);
 
     const textBox = select(`.${panel.id}.popup-text-box`);
     const textBoxText = select(".popup-text-box__text", textBox);
@@ -180,6 +172,10 @@ function positionElements() {
     const headingChars = selectAll(".popup-text-box__heading > *", textBox);
     const subheading = select(".popup-text-box__subheading", textBox);
     const subheadingChars = selectAll(".popup-text-box__subheading > *", textBox);
+    const icon = select(`.${panel.id}.popup-icon`);
+    const iconElement = select(`.${panel.id} .popup-icon__image`);
+    const image = select(`.${panel.id}.popup-image`);
+    const imageElement = select(`.${panel.id} .popup-image__image`);
 
     const headingHeight = heading.getBoundingClientRect().height;
     const subheadingHeight = subheading ? subheading.getBoundingClientRect().height : 0;
@@ -259,15 +255,12 @@ function positionElements() {
     panel.subheadingOverlow = Math.max(0, subheadingWidth - maskWidth);
 
     panel.targets = {
+      heading, 
+      headingChars, 
       icon, 
       iconElement, 
       image, 
       imageElement, 
-      textBox, 
-      textBoxText, 
-      textBoxMask, 
-      heading, 
-      headingChars, 
       subheading, 
       subheadingChars
     };
@@ -448,11 +441,11 @@ function createAnimation() {
   allPanels.forEach(panel => {
 
     const { 
+      heading, 
+      headingChars, 
       icon, 
       iconElement, 
       image, 
-      heading, 
-      headingChars, 
       subheading, 
       subheadingChars 
     } = panel.targets;
@@ -535,6 +528,7 @@ function createAnimation() {
     const textStart = resizeDuration * 0.3;
     const headingStart = `resize+=${textStart}`;
     const subheadingStart = `resize+=${textStart + 0.25}`;
+    const overflowRatio = 0.8;
 
     tl.add(headingTl, headingStart);
     tl.add(subheadingTl, subheadingStart);
@@ -545,7 +539,7 @@ function createAnimation() {
         duration: Math.max(minOverflowDuration, panel.headingOverlow / overflowSpeed),
         x: `-=${panel.headingOverlow / panel.textScale}`,
         ease: "none",
-      }, `resize+=${0.5 + headingDuration * 0.8}`);
+      }, `resize+=${textStart + headingDuration * overflowRatio}`);
     }
 
     if (subheading && panel.subheadingOverlow) {
@@ -554,7 +548,7 @@ function createAnimation() {
         duration: Math.max(minOverflowDuration, panel.subheadingOverlow / overflowSpeed),
         x: `-=${panel.subheadingOverlow / panel.textScale}`,
         ease: "none",
-      }, `resize+=${0.75 + subheadingDuration * 0.8}`);
+      }, `resize+=${0.25 + textStart + subheadingDuration * overflowRatio}`);
     }
 
     if (!icon && prevIcon) {

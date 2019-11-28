@@ -2,11 +2,11 @@ export default {
   padX: 30, // left and right text box padding
   padY: 6, // top and bottom text box padding
   fontTimeout: 1000, // max time to wait for font to load in ms
-  headingOffset: 0.15, // % of heading height to start chars from
+  headingOffset: 0.15, // % of heading height to start split text chars from
   overflowSpeed: 100,
   minOverflowDuration: 0.5,
-  flipX: $_flipX_$,
-  flipY: $_flipY_$,
+  widgetFlipX: Boolean($_flipX_$),
+  widgetFlipY: Boolean($_flipY_$),
   textBoxWidth: Number($_maxTextBoxWidth_$),
   textBoxHeight: Number($_textBoxHeight_$),
   showDuration: Number($_showDuration_$),

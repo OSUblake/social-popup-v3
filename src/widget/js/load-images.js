@@ -31,8 +31,8 @@ function loadImage(panel, prop) {
       const width = image.naturalWidth || image.width;
       const height = image.naturalHeight || image.height;
 
-      if (!width) {
-        // return reject("Image is bad");
+      if (!width || event.type === "error") {
+        console.warn("Cannot load image", panel[prop]);
         panel[prop] = "";
       } else if (prop === "image") {
         panel.imageWidth = width;
