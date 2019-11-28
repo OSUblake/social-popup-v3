@@ -50,7 +50,7 @@ html, body {
   overflow: hidden;
   width: calc(var(--maxTextBoxWidth) + var(--textBoxHeight));
   height: var(--textBoxHeight);
-  background-color: #ddd;
+  /* background-color: #ddd; */
 }
 
 .popup-content {
@@ -87,7 +87,6 @@ html, body {
   overflow: hidden;
   white-space: nowrap;
   height: 100%;
-
   /* outline: 1px solid red; */
 }
 
@@ -176,14 +175,6 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-}
-
-.megaPanel1.popup-image {
-  z-index: 0;
-}
-
-.megaPanel2.popup-image {
-  z-index: 1;
 }
 
 .popup-image__image {

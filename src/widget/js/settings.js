@@ -2,6 +2,7 @@ export default {
   padX: 30, // left and right text box padding
   padY: 6, // top and bottom text box padding
   fontTimeout: 1000, // max time to wait for font to load in ms
+  headingOffset: 0.15, // % of heading height to start chars from
   overflowSpeed: 100,
   minOverflowDuration: 0.5,
   flipX: $_flipX_$,
@@ -53,7 +54,6 @@ export default {
   megaPanels: [
     {
       id: "megaPanel1",
-      megaPanel: true,
       heading: "$_megaPanel1_heading_$",
       subheading: "$_megaPanel1_subheading_$",
       icon: "$_megaPanel1_icon_$",
@@ -61,7 +61,6 @@ export default {
     },
     {
       id: "megaPanel2",
-      megaPanel: true,
       heading: "$_megaPanel2_heading_$",
       subheading: "$_megaPanel2_subheading_$",
       icon: "$_megaPanel2_icon_$",

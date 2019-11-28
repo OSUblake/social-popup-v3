@@ -5,8 +5,7 @@
     "loadEvent": "onLoad",
     "scripts": [
       "\"https://ext-assets.streamlabs.com/users/140067/gsap.min.js\"",
-      "\"https://ext-assets.streamlabs.com/users/140067/SplitText.min.js\"",
-      "\"https://ext-assets.streamlabs.com/users/140067/CustomEase.min.js\""
+      "\"https://ext-assets.streamlabs.com/users/140067/SplitText.min.js\""
     ],
 
     "customFields": {
@@ -94,8 +93,7 @@
     "loadEvent": "onWidgetLoad",
     "scripts": [
       "\"https://cdn.nerdordie.com/gsap/3/gsap.min.js\"",
-      "\"https://cdn.nerdordie.com/gsap/3/SplitText.min.js\"",
-      "\"https://cdn.nerdordie.com/gsap/3/CustomEase.min.js\""
+      "\"https://cdn.nerdordie.com/gsap/3/SplitText.min.js\""
     ],
     "customFields": {
       "backgroundOpacity": {
@@ -119,8 +117,7 @@
     "loadEvent": "onLoad",
     "scripts": [
       "\"https://ext-assets.streamlabs.com/users/140067/gsap.min.js\"",
-      "\"https://ext-assets.streamlabs.com/users/140067/SplitText.min.js\"",
-      "\"https://ext-assets.streamlabs.com/users/140067/CustomEase.min.js\""
+      "\"https://ext-assets.streamlabs.com/users/140067/SplitText.min.js\""
     ],
     "customFields": {
       "numPanels": {

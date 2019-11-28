@@ -152,7 +152,7 @@ async function createStreamlabs({ fields, config, compile }) {
         break;  
 
       default:
-        console.log("\n(!) Deleted field", field)
+        console.log("\n(!) Deleted field", field);
         settings[key] = field.value;
         delete fields[key];
         break;

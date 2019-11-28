@@ -7,7 +7,7 @@ import settings from "./js/settings.js";
 import "../vendor/fontfaceobserver.js";
 
 // (!) Comment out for build
-import "./js/scrub-timeline.js";
+// import "./js/scrub-timeline.js";
 
 const scriptPaths = [$_scripts_$];
 
@@ -38,8 +38,6 @@ function buildWidget() {
     return;
   }
   
-  gsap.registerPlugin(SplitText);
-
   const textBoxes = [];
   const icons = [];
   const images = [];
@@ -48,7 +46,6 @@ function buildWidget() {
 
     // Use double $ signs to sanitize strings
     // $${'<div>Dangerous content</div>'}
-
     textBoxes.push(html`
     <div class="${panel.id} popup-text-box">
       <div class="popup-text-box__mask">
@@ -130,6 +127,8 @@ function positionElements() {
     nullTargetWarn: false
   });
 
+  gsap.registerPlugin(SplitText);
+
   popupBackground = select(".popup-background");
   popupContent = select(".popup-content");
   popupIcons = select(".popup-icons");
@@ -138,11 +137,15 @@ function positionElements() {
 
   const adjustWidth = settings.widthAdjust.toLowerCase() === "auto";
   const alignment = settings.alignment.toLowerCase();
-  const startWidth = settings.textBoxWidth;
-  const padX = settings.padX;
-  const padY = settings.padY;
-  const flipX = settings.flipX;
-  const flipY = settings.flipY;
+
+  const {
+    textBoxWidth: startWidth,
+    headingOffset,
+    flipX,
+    flipY,
+    padX,
+    padY
+  } = settings;
 
   const maxTextBoxHeight = (settings.textBoxHeight - padY * 2);
   const imageWidth = Math.min(settings.maxImageWidth, startWidth);
@@ -307,7 +310,7 @@ function positionElements() {
     }
 
     gsap.set(headingChars, {
-      y: `+=${panel.headingHeight * 0.25 / panel.textScale}`
+      y: `+=${panel.headingHeight * headingOffset / panel.textScale}`
     });
   });
 
@@ -396,10 +399,6 @@ function positionElements() {
 
 function createAnimation() {
   
-  CustomEase.create("easeIn", "0.549, 0, 0.757, 0.460");
-  CustomEase.create("easeOut", "0.149, 0.453, 0.329, 1");
-  CustomEase.create("easeInOut", "M0,0C0.16564702500000003,0,0.228405825,0.17109424,0.301725,0.371944,0.405767975,0.656453368,0.5314574750000001,1,1,1"); 
-
   const {
     minOverflowDuration,
     overflowSpeed,
@@ -409,15 +408,17 @@ function createAnimation() {
   const adjustWidth = settings.widthAdjust.toLowerCase() === "auto";
 
   const firstPanel = allPanels[0];
-  const lastPanel = allPanels[allPanels.length - 1];
   const wait = `+=${settings.showDuration}`;
 
+  const imageDuration = 0.8;
   const resizeDuration = 0.8;
+  const iconEase = "power2";
+  const imageEase = "power4";
   const showHideEase = "power1";
-  const iconEase = "power1";
   const resizeEase = "power4";
+  const textOutroEase = "power1";
 
-  // let prevPanel = null;
+  let prevPanel = null;
   let prevIcon = null;
   let prevImage = null;
   let prevHeading = null;
@@ -429,7 +430,6 @@ function createAnimation() {
   
   const outroTl = gsap.timeline();
   const master = gsap.timeline({
-    // repeat: 1,
     repeat: -1,
     repeatDelay: settings.replayWait
   });   
@@ -468,7 +468,7 @@ function createAnimation() {
       tl.to(prevHeading, {
         duration: 0.3,
         y: `-=${textBoxHeight * 1 / panel.textScale}`,
-        ease: "power1"
+        ease: textOutroEase
       }, "start")
       .set(prevHeading, {
         autoAlpha: 0
@@ -480,7 +480,7 @@ function createAnimation() {
       tl.to(prevSubheading, {
         duration: 0.25,
         y: `-=${panel.headingHeight + textBoxHeight * 1 / panel.textScale}`,
-        ease: "power1"
+        ease: textOutroEase
       }, "start+=0.06")
       .set(prevSubheading, {
         autoAlpha: 0
@@ -528,8 +528,12 @@ function createAnimation() {
     const headingDuration = headingTl.duration();
     const subheadingDuration = subheadingTl.duration();
 
-    tl.add(headingTl, "resize+=0.5");
-    tl.add(subheadingTl, "resize+=0.75");
+    const textStart = resizeDuration * 0.3;
+    const headingStart = `resize+=${textStart}`;
+    const subheadingStart = `resize+=${textStart + 0.25}`;
+
+    tl.add(headingTl, headingStart);
+    tl.add(subheadingTl, subheadingStart);
 
     if (panel.headingOverlow) {
 
@@ -595,12 +599,10 @@ function createAnimation() {
         }, ">");
       }
 
-      tl.add(iconTl, "resize+=0.5");
+      tl.add(iconTl, headingStart);
     }
 
     if (image) {
-
-      const imageDuration = 0.8;
 
       imageTl.set(image, {
         autoAlpha: 1
@@ -608,21 +610,28 @@ function createAnimation() {
       .to(image, {
         duration: imageDuration,
         yPercent: -100,
+        ease: imageEase
       }, 0);
 
       if (prevImage) {
 
         imageTl.to(prevImage, {
           duration: imageDuration,
-          y: `-=${panel.imageHeight}`
+          y: `-=${panel.imageHeight}`,
+          ease: imageEase
         }, 0)
         .to(prevImage, {
           duration: imageDuration / 2,
-          autoAlpha: 0
+          autoAlpha: 0,
+          ease: imageEase
         }, 0);
-      }
 
-      tl.add(imageTl, "resize+=0.5");
+        tl.add(imageTl, "start");
+
+      } else {
+
+        tl.add(imageTl, `resize+=${textStart + 0.35}`);
+      }
     }
 
     tl.set({}, {}, wait);
@@ -631,19 +640,50 @@ function createAnimation() {
 
     prevIcon = icon;
     prevImage = image;
-    // prevPanel = panel;
+    prevPanel = panel;
     prevHeading = heading;
     prevSubheading = subheading;
   });
 
-  const contentX = prevIcon ? -textBoxHeight : 0;
+  if (prevHeading) {
+      
+    outroTl.to(prevHeading, {
+      duration: 0.3,
+      y: `-=${textBoxHeight * 1 / prevPanel.textScale}`,
+      ease: textOutroEase
+    }, 0)
+    .set(prevHeading, {
+      autoAlpha: 0
+    }, ">");
+  }
+
+  if (prevSubheading) {
+
+    outroTl.to(prevSubheading, {
+      duration: 0.25,
+      y: `-=${prevPanel.headingHeight + textBoxHeight * 1 / prevPanel.textScale}`,
+      ease: textOutroEase
+    }, 0.06)
+    .set(prevSubheading, {
+      autoAlpha: 0
+    }, ">");
+  }
+
+  if (prevImage) {
+
+    outroTl.to(prevImage, {
+      duration: imageDuration,
+      yPercent: 0,
+      ease: imageEase
+    }, 0);
+  }
 
   outroTl.to(popupContent, {
     duration: 0.5,
     xPercent: -100,
-    x: contentX,
+    x: prevIcon ? -textBoxHeight : 0,
     ease: showHideEase
-  });
+  }, prevImage ? ">-0.1" : ">");
 
   master.add(outroTl);
 
