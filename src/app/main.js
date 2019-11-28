@@ -9,10 +9,6 @@ import fontOptions from "./font-options.js";
 import Store from "./store.js";
 import parseTemplate from "./parse-template.js";
 
-let requestId = null;
-
-const settingsStore = new Store("scocialPopup1");
-
 const urls = [
   "../widget/config.json",
   "../widget/widget.json",
@@ -21,11 +17,11 @@ const urls = [
   "../widget/widget.js",
 ];
 
+const settingsStore = new Store("scocialPopup1");
+const iframe = document.querySelector("#iframe");
+const onChange = throttle(update, 8);
+
 const guiControls = {
-  clearStorage() {
-    // settingsStore.clear();
-    // update();
-  },
   resetSettings
 };
 
@@ -35,26 +31,12 @@ const gui = new dat.GUI({
 });
 
 const gui2 = new dat.GUI({
-
+  closeOnTop: true
 });
 
-gui2.add(guiControls, "resetSettings").name("Reset GUI");
-
-const iframe = document.querySelector("#iframe");
-
-let settings, defaultSettings, controllers, folders;
-let template, compile;
-
-const onChange = throttle(update, 8);
-// const onChange = throttle(requestUpdate, 8);
+let settings, controllers, template, compile;
 
 init();
-
-function requestUpdate() {  
-  if (!requestId) {
-    requestId = requestAnimationFrame(update);
-  }
-}
 
 async function init() {
 
@@ -89,15 +71,12 @@ async function init() {
   const build = buildGui(gui, json);
   controllers = build.controllers;
   settings = build.settings;
-  folders = build.folders;
 
   Object.assign(
     settings, 
     omit(config, ["development", "streamlabs", "streamElements"]),
     omit(config.development, ["customFields"])
   );
-
-  defaultSettings = JSON.parse(JSON.stringify(settings));
 
   const oldSettings = settingsStore.get();
 
@@ -117,29 +96,20 @@ async function init() {
   }
 
   update();
+
+  gui2.add(guiControls, "resetSettings").name("Reset GUI");
 }
 
 function update() {
-
-  const src = compile(settings);
   
-  if (requestId) {
-    cancelAnimationFrame(requestId);
-  }
+  iframe.srcdoc = compile(settings); 
 
-  requestId = requestAnimationFrame(() => {
-
-    iframe.srcdoc = src; 
-
-    const event = new CustomEvent(settings.loadEvent, {
-      detail: "hello"
-    });
-  
-    const eventTarget = iframe[`content${upperFirst(settings.eventTarget)}`];
-    eventTarget.dispatchEvent(event);
-
-    requestId = null;
+  const event = new CustomEvent(settings.loadEvent, {
+    detail: ""
   });
+
+  const eventTarget = iframe[`content${upperFirst(settings.eventTarget)}`];
+  eventTarget.dispatchEvent(event);
 
   settingsStore.set(settings);
 }
@@ -183,22 +153,6 @@ function buildGui(gui, fields) {
     let folder = gui;
     let controller;
 
-    // if (field.folder) {
-
-    //   if (!Array.isArray(field.folder)) {
-    //     field.folder = [field.folder];
-    //   }
-
-    //   field.folder.forEach(folderName => {
-
-    //     if (!folders.has(folderName)) {
-    //       folders.set(folderName, folder.addFolder(folderName));
-    //     }
-
-    //     folder = folders.get(folderName);
-    //   });
-    // }
-
     if (field.group) {
 
       if (!Array.isArray(field.group)) {
@@ -229,7 +183,6 @@ function buildGui(gui, fields) {
       controller = folder.add(settings, key); 
     }
 
-    // controller.onChange(requestUpdate);
     controller.onChange(onChange);
     controllers.set(key, controller);
   });

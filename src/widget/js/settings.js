@@ -1,9 +1,9 @@
 export default {
-  fontTimeout: 1500,
+  padX: 30, // left and right text box padding
+  padY: 6, // top and bottom text box padding
+  fontTimeout: 1000, // max time to wait for font to load in ms
   overflowSpeed: 100,
   minOverflowDuration: 0.5,
-  padX: 30,
-  padY: 6,
   flipX: $_flipX_$,
   flipY: $_flipY_$,
   textBoxWidth: Number($_maxTextBoxWidth_$),
