@@ -34,6 +34,10 @@ Promise.all([
 
 function buildWidget() {
 
+  // filter mega panels again in case image failed
+  megaPanels = megaPanels.filter(p => p.image);
+  allPanels = [...panels, ...megaPanels];
+
   if (!allPanels.length) {
     return;
   }
@@ -675,15 +679,18 @@ function createAnimation() {
       duration: imageDuration,
       yPercent: 0,
       ease: imageEase
-    }, 0);
+    }, 0)
+    .set(prevImage, {
+      autoAlpha: 0
+    }, ">");
   }
 
   outroTl.to(popupContent, {
-    duration: 0.5,
+    duration: 0.3,
     xPercent: -100,
     x: prevIcon ? -textBoxHeight : 0,
     ease: showHideEase
-  }, prevImage ? ">-0.1" : ">");
+  }, ">");
 
   master.add(outroTl);
 
