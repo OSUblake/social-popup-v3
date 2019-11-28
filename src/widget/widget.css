@@ -34,6 +34,12 @@
   --megaPanel2_imageOpacity: $_megaPanel2_imageOpacity_$;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 .popup-holder, .popup-holder * {
   position: relative;
 }

@@ -104,10 +104,10 @@
       "iconOpacity": {
         "type": "remove"
       },
-      "megaPanel1_imageBackgroundOpacity": {
+      "megaPanel1_imageOpacity": {
         "type": "remove"
       },
-      "megaPanel2_imageBackgroundOpacity": {
+      "megaPanel2_imageOpacity": {
         "type": "remove"
       }
     }
