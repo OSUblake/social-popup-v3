@@ -349,7 +349,7 @@ function positionElements() {
   });
 
   gsap.set(".popup-icon, .popup-image, .popup-text-box__heading, .popup-text-box__subheading", {
-    opacity: 0
+    autoAlpha: 0
   });
 
   gsap.set(popupContent, {
@@ -382,7 +382,7 @@ function positionElements() {
   if (firstPanel.icon) {
 
     gsap.set(firstPanel.targets.icon, {
-      opacity: 1,
+      autoAlpha: 1,
       xPercent: 0
     });
 
@@ -471,7 +471,7 @@ function createAnimation() {
         ease: "power1"
       }, "start")
       .set(prevHeading, {
-        opacity: 0
+        autoAlpha: 0
       }, ">");
     }
 
@@ -483,7 +483,7 @@ function createAnimation() {
         ease: "power1"
       }, "start+=0.06")
       .set(prevSubheading, {
-        opacity: 0
+        autoAlpha: 0
       }, ">");
     }
 
@@ -504,7 +504,7 @@ function createAnimation() {
     }
 
     headingTl.set(heading, {
-      opacity: 1
+      autoAlpha: 1
     })
     .to(headingChars, {
       duration: 0.08,
@@ -516,7 +516,7 @@ function createAnimation() {
     if (subheading) {
 
       subheadingTl.set(subheading, {
-        opacity: 1
+        autoAlpha: 1
       })
       .to(subheadingChars, {
         duration: 0.08,
@@ -557,7 +557,7 @@ function createAnimation() {
         ease: iconEase
       })
       .set(prevIcon, {
-        opacity: 0
+        autoAlpha: 0
       }, ">");
 
       tl.add(iconTl, "start+=0.3");
@@ -566,7 +566,7 @@ function createAnimation() {
     if (icon) {
 
       iconTl.set(icon, {
-        opacity: 1
+        autoAlpha: 1
       }, 0)
       .to(icon, {
         duration: 0.3,
@@ -591,7 +591,7 @@ function createAnimation() {
           ease: iconEase
         }, 0)
         .set(prevIcon, {
-          opacity: 0
+          autoAlpha: 0
         }, ">");
       }
 
@@ -603,7 +603,7 @@ function createAnimation() {
       const imageDuration = 0.8;
 
       imageTl.set(image, {
-        opacity: 1
+        autoAlpha: 1
       }, 0)
       .to(image, {
         duration: imageDuration,
@@ -618,7 +618,7 @@ function createAnimation() {
         }, 0)
         .to(prevImage, {
           duration: imageDuration / 2,
-          opacity: 0
+          autoAlpha: 0
         }, 0);
       }
 
