@@ -4,7 +4,7 @@ const videoExtensions = "3gp,mpg,mpeg,mp4,m4v,m4p,ogv,ogg,mov,webm".split(",");
 
 export default function(panels) {
 
-  const promises = panels.reduce((res, panel) => {
+  return panels.reduce((res, panel) => {
 
     if (panel.icon) {
       res.push(loadImage(panel, "icon"));
@@ -25,8 +25,6 @@ export default function(panels) {
     
     return res;
   }, []);
-
-  return promises;
 }
 
 function loadImage(panel, prop) {
