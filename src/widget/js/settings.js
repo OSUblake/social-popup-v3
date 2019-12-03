@@ -58,6 +58,7 @@ export default {
       subheading: "$_megaPanel1_subheading_$",
       icon: "$_megaPanel1_icon_$",
       image: "$_megaPanel1_image_$",
+      video: "$_megaPanel1_video_$"
     },
     {
       id: "megaPanel2",
@@ -65,6 +66,7 @@ export default {
       subheading: "$_megaPanel2_subheading_$",
       icon: "$_megaPanel2_icon_$",
       image: "$_megaPanel2_image_$",
+      video: "$_megaPanel2_video_$"
     }
   ]
 };

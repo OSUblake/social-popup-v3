@@ -12,11 +12,11 @@ import "../vendor/fontfaceobserver.js";
 const scriptPaths = [$_scripts_$];
 
 let panels = settings.panels
-  .filter(p => p.heading)
+  .filter(panel => panel.heading)
   .slice(0, settings.numPanels);
 
 let megaPanels = settings.megaPanels
-  .filter(p => p.heading && p.image)
+  .filter(panel => panel.heading && (panel.image || panel.video))
   .slice(0, settings.numMegaPanels);
 
 let allPanels = [...panels, ...megaPanels];
@@ -34,8 +34,8 @@ Promise.all([
 
 function buildWidget() {
 
-  // filter mega panels again in case image failed
-  megaPanels = megaPanels.filter(p => p.image);
+  // filter mega panels again in case media failed
+  megaPanels = megaPanels.filter(panel => (panel.image || panel.video));
   allPanels = [...panels, ...megaPanels];
 
   if (!allPanels.length) {
@@ -73,7 +73,16 @@ function buildWidget() {
       `);
     }
 
-    if (panel.image) {
+    if (panel.isVideo) {
+
+      images.push(html`
+        <div class="${panel.id} popup-image">
+          <div class="popup-image__background"></div>
+          <video class="popup-image__image" src="${panel.video}" muted>
+        </div>
+      `);
+
+    } else if (panel.image) {
 
       images.push(html`
         <div class="${panel.id} popup-image">
@@ -463,6 +472,7 @@ function createAnimation() {
       headingChars, 
       icon, 
       iconElement, 
+      imageElement: video, 
       image, 
       subheading, 
       subheadingChars 
@@ -629,6 +639,16 @@ function createAnimation() {
         ease: imageEase
       }, 0);
 
+      if (panel.isVideo) {
+
+        imageTl.add(() => {
+          video.currentTime = 0;
+          video.play();
+        }, 0);
+
+        imageTl.set({}, {}, panel.videoDuration);
+      }
+
       if (prevImage) {
 
         imageTl.to(prevImage, {
@@ -650,7 +670,9 @@ function createAnimation() {
       }
     }
 
-    tl.set({}, {}, wait);
+    if (!panel.isVideo) {
+      tl.set({}, {}, wait);
+    }    
 
     master.add(tl, isFirstPanel ? "-=0.5" : ">");
 

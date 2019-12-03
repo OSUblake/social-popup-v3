@@ -367,6 +367,12 @@
     "value": "#181818",
     "group": ["Mega Panels", "Mega Panel 1"]
   },
+  "megaPanel1_video": {
+    "label": "Mega panel 1 video",
+    "type": "video-input",
+    "value": "",
+    "group": ["Mega Panels", "Mega Panel 1"]
+  },
   "megaPanel1_image": {
     "label": "Mega panel 1 image",
     "type": "image-input",
@@ -374,13 +380,13 @@
     "group": ["Mega Panels", "Mega Panel 1"]
   },
   "megaPanel1_imageColor": {
-    "label": "Mega panel 1 image background color",
+    "label": "Mega panel 1 media background color",
     "type": "colorpicker",
     "value": "#ffffff",
     "group": ["Mega Panels", "Mega Panel 1"]
   },
   "megaPanel1_imageOpacity": {
-    "label": "Mega panel 1 image background opacity",
+    "label": "Mega panel 1 media background opacity",
     "type": "slider",
     "value": 1,
     "min": 0,
@@ -413,6 +419,12 @@
     "value": "#181818",
     "group": ["Mega Panels", "Mega Panel 2"]
   },
+  "megaPanel2_video": {
+    "label": "Mega panel 2 video",
+    "type": "video-input",
+    "value": "",
+    "group": ["Mega Panels", "Mega Panel 2"]
+  },
   "megaPanel2_image": {
     "label": "Mega panel 2 image",
     "type": "image-input",
@@ -420,13 +432,13 @@
     "group": ["Mega Panels", "Mega Panel 2"]
   },
   "megaPanel2_imageColor": {
-    "label": "Mega panel 2 image background color",
+    "label": "Mega panel 2 media background color",
     "type": "colorpicker",
     "value": "#ffffff",
     "group": ["Mega Panels", "Mega Panel 2"]
   },
   "megaPanel2_imageOpacity": {
-    "label": "Mega panel 2 image background opacity",
+    "label": "Mega panel 2 media background opacity",
     "type": "slider",
     "value": 1,
     "min": 0,

@@ -68,6 +68,9 @@
       "megaPanel1_icon": {
         "value": "../assets/icon-4.png"
       },
+      "megaPanel1_video": {
+        "value": "../assets/video-1.webm"
+      },
       "megaPanel1_image": {
         "value": "../assets/focus.jpg"
       },
@@ -80,6 +83,9 @@
       },
       "megaPanel2_icon": {
         "value": "../assets/icon-5.png"
+      },
+      "megaPanel2_video": {
+        "value": "../assets/video-4.webm"
       },
       "megaPanel2_image": {
         "value": "../assets/bit.png"
@@ -125,6 +131,12 @@
       },
       "numMegaPanels": {
         "group": ""
+      },
+      "megaPanel1_video": {
+        "type": "remove"
+      },
+      "megaPanel2_video": {
+        "type": "remove"
       }
     }
   }

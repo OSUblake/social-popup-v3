@@ -270,6 +270,22 @@ async function createStreamElements({ fields, config, compile }) {
         };
         break;
 
+      case "video-input":
+        fields[key] = {
+          label: field.label,
+          type: "video-input",
+          value: field.value
+        };
+        break;
+
+      case "sound-input":
+        fields[key] = {
+          label: field.label,
+          type: "sound-input",
+          value: field.value
+        };
+        break;
+
       case "remove":
         settings[key] = field.value;
         delete fields[key];
