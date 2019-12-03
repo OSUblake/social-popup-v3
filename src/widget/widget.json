@@ -86,8 +86,8 @@
     "label": "Max text box width",
     "type": "slider",
     "value": 800,
-    "min": 400,
-    "max": 1000,
+    "min": 100,
+    "max": 2000,
     "steps": 1,
     "group": "Layout and style"
   },
@@ -101,7 +101,7 @@
     "group": "Layout and style"
   },
   "maxImageWidth": {
-      "label": "Max image width",
+      "label": "Max image/video width",
       "type": "slider",
       "value": 800,
       "min": 100,
@@ -110,7 +110,7 @@
       "group": "Layout and style"
   },
   "maxImageHeight": {
-      "label": "Max image height",
+      "label": "Max image/video height",
       "type": "slider",
       "value": 800,
       "min": 100,

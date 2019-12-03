@@ -84,6 +84,8 @@ function loadVideo(panel, prop) {
         panel.videoDuration = duration;
       }
 
+      console.log({video})
+
       resolve(video);
     }
   });
