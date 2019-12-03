@@ -211,15 +211,18 @@ function positionElements() {
     let textBoxWidth = startWidth;
     let tempMaskWidth = textWidth + padX * 2;
 
-    if (imageElement) {
+    if (imageElement) {     
 
-      const sx = imageWidth / panel.imageWidth;
-      const sy = imageHeight / panel.imageHeight;
+      if (panel.imageWidth > imageWidth || panel.imageHeight > imageHeight) {
 
-      const scale = Math.min(sx, sy);
-      
-      panel.imageWidth *= scale;
-      panel.imageHeight *= scale;      
+        const sx = imageWidth / panel.imageWidth;
+        const sy = imageHeight / panel.imageHeight;
+  
+        const scale = Math.min(sx, sy);
+        
+        panel.imageWidth *= scale;
+        panel.imageHeight *= scale; 
+      }
 
       if (adjustWidth) {
         textBoxWidth = Math.max(panel.imageWidth, textBoxWidth);
@@ -360,22 +363,37 @@ function positionElements() {
   if (flipX) {
 
     gsap.set(popupHolder, {
-      rotationY: 180
+      rotationY: 180,
+      right: 0
     });
 
     gsap.set(".popup-icon__image, .popup-icon__background, .popup-image__image, .popup-image__background, .popup-text-boxes", {
       rotationY: 180
     });
+
+  } else {
+
+    gsap.set(popupHolder, {
+      left: 0
+    });
+
   }
 
   if (flipY) {
 
     gsap.set(popupHolder, {
-      rotationX: 180
+      rotationX: 180,
+      top: 0
     });
 
     gsap.set(".popup-icon__image, .popup-icon__background, .popup-image__image, .popup-image__background, .popup-text-boxes", {
       rotationX: 180
+    });
+
+  } else {
+
+    gsap.set(popupHolder, {
+      bottom: 0
     });
   }
 

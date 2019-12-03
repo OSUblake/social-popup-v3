@@ -40,17 +40,18 @@ html, body {
   overflow: hidden;
 }
 
-.popup-holder, .popup-holder * {
-  position: relative;
-}
-
 .popup-holder {
+  position: absolute;
   visibility: hidden;
   opacity: 0;
   overflow: hidden;
   width: calc(var(--maxTextBoxWidth) + var(--textBoxHeight));
   height: var(--textBoxHeight);
   /* background-color: #ddd; */
+}
+
+.popup-holder * {
+  position: relative;
 }
 
 .popup-content {
