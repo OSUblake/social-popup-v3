@@ -222,7 +222,7 @@ function positionElements() {
 
     if (imageElement) {     
 
-      if (panel.imageWidth > imageWidth || panel.imageHeight > imageHeight) {
+      if (panel.imageWidth > imageWidth || panel.imageHeight > imageHeight || panel.scaleToFit) {
 
         const sx = imageWidth / panel.imageWidth;
         const sy = imageHeight / panel.imageHeight;

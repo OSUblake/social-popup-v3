@@ -379,6 +379,17 @@
     "value": "",
     "group": ["Mega Panels", "Mega Panel 1"]
   },
+  "megaPanel1_scaleToFit": {
+    "label": "Mega panel 1 scale image/video",
+    "desc": "Scale image/video to fit max image width and height constraints",
+    "type": "dropdown",
+    "value": "true",
+    "options": {
+        "true": "True",
+        "false": "False"
+    },
+    "group": ["Mega Panels", "Mega Panel 1"]
+  },
   "megaPanel1_imageColor": {
     "label": "Mega panel 1 media background color",
     "type": "colorpicker",
@@ -429,6 +440,17 @@
     "label": "Mega panel 2 image",
     "type": "image-input",
     "value": "",
+    "group": ["Mega Panels", "Mega Panel 2"]
+  },
+  "megaPanel2_scaleToFit": {
+    "label": "Mega panel 2 scale image/video",
+    "desc": "Scale image/video to fit max image width and height constraints",
+    "type": "dropdown",
+    "value": "true",
+    "options": {
+        "true": "True",
+        "false": "False"
+    },
     "group": ["Mega Panels", "Mega Panel 2"]
   },
   "megaPanel2_imageColor": {
