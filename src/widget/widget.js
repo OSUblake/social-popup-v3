@@ -449,7 +449,7 @@ function createAnimation() {
   let prevSubheading = null;
 
   gsap.defaults({
-    ease: "power4"
+    ease: "back(1.7)",
   }); 
   
   const outroTl = gsap.timeline();
@@ -462,7 +462,7 @@ function createAnimation() {
   .to(popupContent, {
     duration: 0.5,
     xPercent: 0,
-    ease: showHideEase
+    // ease: showHideEase
   });
 
   allPanels.forEach(panel => {
@@ -493,7 +493,7 @@ function createAnimation() {
       tl.to(prevHeading, {
         duration: 0.3,
         y: `-=${textBoxHeight * 1 / panel.textScale}`,
-        ease: textOutroEase
+        // ease: textOutroEase
       }, "start")
       .set(prevHeading, {
         autoAlpha: 0
@@ -505,7 +505,7 @@ function createAnimation() {
       tl.to(prevSubheading, {
         duration: 0.25,
         y: `-=${panel.headingHeight + textBoxHeight * 1 / panel.textScale}`,
-        ease: textOutroEase
+        // ease: textOutroEase
       }, "start+=0.06")
       .set(prevSubheading, {
         autoAlpha: 0
@@ -519,12 +519,12 @@ function createAnimation() {
       tl.to(popupIcons, {
         duration: resizeDuration,
         x: panel.iconX,
-        ease: resizeEase
+        // ease: resizeEase
       }, "resize")
       .to(popupBackground, {
         duration: resizeDuration,
         scaleX: panel.bgScale,
-        ease: resizeEase
+        // ease: resizeEase
       }, "resize");
     }
 
@@ -566,7 +566,7 @@ function createAnimation() {
       tl.to(heading, {
         duration: Math.max(minOverflowDuration, panel.headingOverlow / overflowSpeed),
         x: `-=${panel.headingOverlow / panel.textScale}`,
-        ease: "none",
+        // ease: "none",
       }, `resize+=${textStart + headingDuration * overflowRatio}`);
     }
 
@@ -575,7 +575,7 @@ function createAnimation() {
       tl.to(subheading, {
         duration: Math.max(minOverflowDuration, panel.subheadingOverlow / overflowSpeed),
         x: `-=${panel.subheadingOverlow / panel.textScale}`,
-        ease: "none",
+        // ease: "none",
       }, `resize+=${0.25 + textStart + subheadingDuration * overflowRatio}`);
     }
 
@@ -584,7 +584,7 @@ function createAnimation() {
       iconTl.to(prevIcon, {
         xPercent: -100,
         duration: 0.3,
-        ease: iconEase
+        // ease: iconEase
       })
       .set(prevIcon, {
         autoAlpha: 0
@@ -601,7 +601,7 @@ function createAnimation() {
       .to(icon, {
         duration: 0.3,
         xPercent: 0,
-        ease: iconEase
+        // ease: iconEase
       }, 0);
 
       if (isFirstPanel) {
@@ -609,7 +609,7 @@ function createAnimation() {
         iconTl.to(iconElement, {
           duration: 0.3,
           x: 0,
-          ease: iconEase
+          // ease: iconEase
         }, 0);
       }
 
@@ -618,7 +618,7 @@ function createAnimation() {
         iconTl.to(prevIcon, {
           duration: 0.3,
           xPercent: 100,
-          ease: iconEase
+          // ease: iconEase
         }, 0)
         .set(prevIcon, {
           autoAlpha: 0
@@ -636,7 +636,7 @@ function createAnimation() {
       .to(image, {
         duration: imageDuration,
         yPercent: -100,
-        ease: imageEase
+        // ease: imageEase
       }, 0);
 
       if (panel.isVideo) {
@@ -654,12 +654,12 @@ function createAnimation() {
         imageTl.to(prevImage, {
           duration: imageDuration,
           y: `-=${panel.imageHeight}`,
-          ease: imageEase
+          // ease: imageEase
         }, 0)
         .to(prevImage, {
           duration: imageDuration / 2,
           autoAlpha: 0,
-          ease: imageEase
+          // ease: imageEase
         }, 0);
 
         tl.add(imageTl, "start");
@@ -688,7 +688,7 @@ function createAnimation() {
     outroTl.to(prevHeading, {
       duration: 0.3,
       y: `-=${textBoxHeight * 1 / prevPanel.textScale}`,
-      ease: textOutroEase
+      // ease: textOutroEase
     }, 0)
     .set(prevHeading, {
       autoAlpha: 0
@@ -700,7 +700,7 @@ function createAnimation() {
     outroTl.to(prevSubheading, {
       duration: 0.25,
       y: `-=${prevPanel.headingHeight + textBoxHeight * 1 / prevPanel.textScale}`,
-      ease: textOutroEase
+      // ease: textOutroEase
     }, 0.06)
     .set(prevSubheading, {
       autoAlpha: 0
@@ -712,7 +712,7 @@ function createAnimation() {
     outroTl.to(prevImage, {
       duration: imageDuration,
       yPercent: 0,
-      ease: imageEase
+      // ease: imageEase
     }, 0)
     .set(prevImage, {
       autoAlpha: 0
@@ -723,7 +723,7 @@ function createAnimation() {
     duration: 0.3,
     xPercent: -100,
     x: prevIcon ? -textBoxHeight : 0,
-    ease: showHideEase
+    // ease: showHideEase
   }, ">");
 
   master.add(outroTl);
